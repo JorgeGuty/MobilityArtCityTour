@@ -1,0 +1,21 @@
+export const Colors = {
+  business: '#00B5AE',
+  businessClicked: '#007C78',
+  people: '#6A2C90',
+  home: '#F68B1F',
+  kolbi: '#ABDC4E',
+  background1: '#FFFFFF',
+  background1Clicked: 'rgba(0, 181, 174, 0.15)',
+  background2: '#FAFAFA',
+  background3: '#F2F2F2',
+  backgroundDisabled: '#F7F7F7',
+  background3Clicked: '#C9C9C9',
+  textAlt1: '#FFFFFF',
+  textAlt2: '#F2F2F2',
+  text1: '#4B4B4B',
+  text2: '#646B70',
+  textDisabled: '#B1B5B7',
+  shadowHeld: '#03938D',
+  shadowUnheld: '#000000',
+  rojoKolbi: '#EF4632'
+}
