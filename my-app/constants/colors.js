@@ -17,5 +17,16 @@ export const Colors = {
   textDisabled: '#B1B5B7',
   shadowHeld: '#03938D',
   shadowUnheld: '#000000',
-  rojoKolbi: '#EF4632'
+  rojoKolbi: '#EF4632',
+  
+  actBlue1: '#477680',
+  actBlue2: '#5F99A6',
+  actBlue3: '#90FC2CA',
+  actBlue4: '#BFD6DB',
+
+  actGray1:"#3D3D3D",
+  actGray2:"#636363",
+  actGray3:"#ADADAD",
+  actGray4:"#CBCBCB",
+  actGray5:"#f3f3f3"
 }

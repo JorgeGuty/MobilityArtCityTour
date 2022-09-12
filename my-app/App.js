@@ -1,12 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import Home from './screens/home/Home';
+import { SafeAreaView, ScrollView } from 'react-native';
+import NavigationMapExample from './examples/screens/NavigationMap.eg';
+import StopCardExample from './examples/screens/StopCard.eg';
+import IconButtonExample from './examples/styleguide/buttons/IconButton.eg';
+
+const Stack = createNativeStackNavigator()
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    /*<NavigationContainer>
+      	<Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+          <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
+        </Stack.Navigator>
+    </NavigationContainer>*/
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={{ marginTop: 0 }}>
+        {/*<NavigationMapExample></NavigationMapExample>*/}
+        <StopCardExample></StopCardExample>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 

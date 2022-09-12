@@ -318,3 +318,61 @@ export const Icon = (props) => {
     </Text>
   )
 }
+
+import { useFonts } from 'expo-font';
+
+export const MACTText = (props) => {
+
+  const [loaded] = useFonts({
+    NunitoRegular: require('../assets/fonts/Nunito-Regular.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
+  return (
+    <Text
+      allowFontScaling={false}
+      {...props}
+      style={[
+        {
+          fontFamily: 'NunitoRegular',
+          fontSize: 15,
+          color: Colors.icon
+        },
+        props.style
+      ]}
+    >
+      {props.children}
+    </Text>
+  )
+}
+
+export const MACTTextBold = (props) => {
+
+  const [loaded] = useFonts({
+    NunitoBold: require('../assets/fonts/Nunito-Bold.ttf'),
+  });
+
+  if (!loaded) {
+    return null;
+  }
+
+  return (
+    <Text
+      allowFontScaling={false}
+      {...props}
+      style={[
+        {
+          fontFamily: 'NunitoBold',
+          fontSize: 15,
+          color: Colors.icon
+        },
+        props.style
+      ]}
+    >
+      {props.children}
+    </Text>
+  )
+}
