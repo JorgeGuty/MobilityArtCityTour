@@ -1,9 +1,12 @@
-import { useEffect, useState, useRef } from 'react'
-import { Dimensions, Text, View } from 'react-native'
-import SelectedRouteModal from '../selected_route_modal/SelectedRouteModal'
-import NavigationMap from './NavigationMap/NavigationMap'
+import { Pressable, View } from "react-native"
+import NavigationMap from "../../screens/home/NavigationMap/NavigationMap"
+import { Dimensions } from "react-native"
+import { useState } from "react"
+import StopCard from "../../screens/selected_route_modal/StopCard/StopCard"
+import VisitedLabel from "../../screens/selected_route_modal/StopCard/VisitedLabel/VisitedLabel"
+import SelectedRouteModal from "../../screens/selected_route_modal/SelectedRouteModal"
 
-const Home = ({ navigation }) => {
+const SelectedRouteModalExample = () => {
 
   const route = {
     name: "Ruta Davivienda",
@@ -52,22 +55,13 @@ const Home = ({ navigation }) => {
       ]
   }
 
-  const initialRegion = {
-    latitude: route.stops[0].latitude,
-    longitude: route.stops[0].longitude,
-    latitudeDelta: 0.0062,
-    longitudeDelta: 0.0061
-  }
 
-  const [showStops, setShowStops] = useState(true)
-  
 
   return (
-    <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
-        <NavigationMap initialRegion={initialRegion} stops={route.stops} showStops={showStops}></NavigationMap>
-        <SelectedRouteModal route={route}></SelectedRouteModal>
-    </View>
-  )
-}
 
-export default Home
+        <SelectedRouteModal route={route}></SelectedRouteModal>
+
+    )
+  }
+  
+  export default SelectedRouteModalExample

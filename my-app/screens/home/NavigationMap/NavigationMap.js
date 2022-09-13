@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef, Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, processColor, StyleSheet, Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, AnimatedRegion, Marker } from 'react-native-maps';
 import { MapStyle } from './NavigationMap.styles';
 import MapViewDirections from 'react-native-maps-directions';
+import IndexedMarker from './IndexedMarker/IndexedMarker';
+import {API_KEY} from "@env";
 
 const NavigationMap = ({ initialRegion, stops, showStops }) => {
 
@@ -23,7 +25,9 @@ const NavigationMap = ({ initialRegion, stops, showStops }) => {
                   longitude: stop.longitude
                 }}
                 title={stop.name}
-              />
+              >
+                <IndexedMarker index={index}></IndexedMarker>
+              </Marker>
           ))
         }
         {  
@@ -37,7 +41,7 @@ const NavigationMap = ({ initialRegion, stops, showStops }) => {
               strokeColor="rgba(255,187,51,1)"
               lineCap='butt'
               lineJoin='bevel'
-              apikey={'AIzaSyAvIj-2g_q0awQM-ZDT8F7k2BjrGfOGWFc'}
+              apikey={API_KEY}
             />
 
           )) 

@@ -4,9 +4,9 @@ import { Colors } from '../../../constants/colors'
 export const styles = StyleSheet.create({
   mainContainer: { 
     flex : 1, 
-    maxWidth: '80%',
+    backgroundColor: "white", 
     borderRadius: 18, 
-    marginRight: 20, 
+    marginHorizontal: 10, 
     marginVertical: 5, 
     flexDirection: 'row', 
     paddingHorizontal: 30, 
@@ -26,11 +26,5 @@ export const styles = StyleSheet.create({
   icon: {
     color: Colors.business
   },
-  indexLabel:{width : 40, height: 40, borderRadius: 20, borderWidth: 3, alignItems: 'center', borderColor: Colors.actBlue2, paddingVertical: 3},
-  visitedArrangement: {
-    backgroundColor: Colors.actGray5
-  },
-  notVisitedArrangement: {
-    backgroundColor: "white"
-  }
+  indexLabel:{width : 40, height: 40, borderRadius: 20, borderWidth: 3, alignItems: 'center', borderColor: Colors.actBlue2, paddingVertical: 3}
 })

@@ -43,7 +43,7 @@ const StopCardExample = () => {
 
   return (
       <View style={{ width: Dimensions.get('screen').width, height: 200 }}>
-        <StopCard stopName={stops[0].name} stopDescripion="Museo" visited={visited} onPressStopCard={onPress} index={99}></StopCard>
+        <StopCard stopName={stops[0].name} stopDescripion="Museo" visited={visited} index={99}></StopCard>
       </View>
     )
   }

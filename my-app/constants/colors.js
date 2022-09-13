@@ -28,5 +28,6 @@ export const Colors = {
   actGray2:"#636363",
   actGray3:"#ADADAD",
   actGray4:"#CBCBCB",
-  actGray5:"#f3f3f3"
+  actGray5:"#f3f3f3",
+  actGray6: "#fcfcfc"
 }
