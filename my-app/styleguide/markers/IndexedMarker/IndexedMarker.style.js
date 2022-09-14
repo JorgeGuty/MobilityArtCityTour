@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../../../../constants/colors'
+import { Colors } from '../../../constants/colors'
 
 export const styles = StyleSheet.create({
   marker: {
@@ -16,9 +16,10 @@ export const styles = StyleSheet.create({
     transform: [{ rotateZ: '45deg' }]
   },
   markerText: { 
-    color: "white", 
-    transform: [{ rotateZ: '-45deg' }], 
+    color: Colors.actBlue1,
+    position:'absolute',
     fontWeight: 'bold', 
+    bottom:14,
     fontSize: 14 
-    }
+  }
 })

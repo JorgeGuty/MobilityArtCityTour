@@ -4,9 +4,8 @@ import { styles } from './StopCard.style'
 import { Subtitle1, H7, H1, H2, H3, H4, H5, MACTText, MACTTextBold } from '../../../constants/fonts'
 import { Colors } from '../../../constants/colors'
 import VisitedLabel from './VisitedLabel/VisitedLabel'
-import IconBus from '../../../assets/icons/boton_buseta.svg'
-import IconTouch from '../../../assets/icons/touch_app.svg'
 import BussesInfoButton from './BusesInfoButton/BussesInfoButton'
+import IndexedMarker from '../../../styleguide/markers/IndexedMarker/IndexedMarker'
 
 const StopCard = ({ stopId, stopName, stopDescripion, index, visited }) => {
   
@@ -25,11 +24,9 @@ const StopCard = ({ stopId, stopName, stopDescripion, index, visited }) => {
             </View>
             <VisitedLabel style={{flex : 1}} isVisited={isVisited}></VisitedLabel>
         </View>
-        <View style={{flex : 1, flexDirection: 'column', alignItems: 'center'}}>
+        <View style={{flex : 1, flexDirection: 'column', alignItems: 'center', justifyContent:'center', alignItems:'center'}}>
             <View style={{flex: 2}}>
-              <View style={[styles.indexLabel]}>
-                <MACTTextBold style={{ fontSize: 20, color: Colors.actBlue2}}>{index}</MACTTextBold>
-              </View>
+              <IndexedMarker index={index}></IndexedMarker>
             </View>
             <BussesInfoButton stopId={stopId}></BussesInfoButton>
         </View>

@@ -64,7 +64,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
-        <NavigationMap initialRegion={initialRegion} stops={route.stops} showStops={showStops}></NavigationMap>
+        <NavigationMap  initialRegion={initialRegion} stops={route.stops} showStops={showStops}></NavigationMap>
         <SelectedRouteModal route={route}></SelectedRouteModal>
     </View>
   )

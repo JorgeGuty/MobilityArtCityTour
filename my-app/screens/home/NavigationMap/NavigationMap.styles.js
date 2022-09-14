@@ -1,3 +1,7 @@
+import { StyleSheet } from 'react-native'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
+
+
 export const MapStyle = [
     {
       "elementType": "labels",
@@ -241,3 +245,19 @@ export const MapStyle = [
       ]
     }
   ]
+
+
+
+export const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 2,
+      height: 2
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+
+    elevation: 1
+  }
+})
