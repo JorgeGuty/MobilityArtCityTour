@@ -1,11 +1,14 @@
 package api.controllers;
 
+import api.pojos.Route;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.FileReader;
 
 @RestController
 public class MainController {
@@ -32,6 +35,20 @@ public class MainController {
     public ResponseEntity<?> test(@RequestBody String body){
         System.out.println("Hola");
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/getRoute", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Route testLogin(@RequestParam(value = "username") String value, @RequestParam(value = "password") String value2){
+        //return SQLConnection.getInstance().login(value, value2);
+        Route data = null;
+        try {
+            Gson gson = new Gson();
+            JsonReader reader = new JsonReader(new FileReader("src/main/resources/mockingJson/ruta1.json"));
+            data = gson.fromJson(reader, Route.class);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return data;
     }
 
 }
