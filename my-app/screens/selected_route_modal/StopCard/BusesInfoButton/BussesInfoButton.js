@@ -5,7 +5,7 @@ import { Colors } from '../../../../constants/colors'
 import BusIcon from '../../../../assets/icons/boton_buseta.svg'
 import { styles } from './BussesInfoButton.style'
 
-const BussesInfoButton = ({ stopId }) => {
+const BussesInfoButton = ({ stopId, onPress }) => {
   
   const [pressed, setPressed] = useState(false)
 
@@ -14,11 +14,10 @@ const BussesInfoButton = ({ stopId }) => {
   }
 
   const onPressOut = () => {
-    setPressed(false)
   }
 
   return (
-    <Pressable onPressIn={onPressIn} onPressOut={onPressOut} style={{flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+    <Pressable onPressIn={onPressIn} onPressOut={onPressOut} onPress={() => onPress()} style={{flex: 1, alignItems: 'center', justifyContent: 'center', }}>
       <BusIcon height={40} width={40} style={!!pressed ? null : styles.shadow}></BusIcon>
     </Pressable>
   )

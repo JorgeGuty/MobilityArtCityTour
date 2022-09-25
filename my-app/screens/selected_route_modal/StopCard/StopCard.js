@@ -7,28 +7,28 @@ import VisitedLabel from './VisitedLabel/VisitedLabel'
 import BussesInfoButton from './BusesInfoButton/BussesInfoButton'
 import IndexedMarker from '../../../styleguide/markers/IndexedMarker/IndexedMarker'
 
-const StopCard = ({ stopId, stopName, stopDescripion, index, visited }) => {
+const StopCard = ({ stopId, stopName, stopDescription, index, visited, onPressBusInfo, onPressStopInfo }) => {
   
-  const [isVisited, setVisited] = useState(visited)
-
-  const onPressStopCard = () => {
-    setVisited(!isVisited)
-  }
 
   return (
-    <Pressable style={[styles.mainContainer, !!isVisited ? styles.visitedArrangement : [styles.notVisitedArrangement, styles.shadow]]} onPress={onPressStopCard}>
+    <Pressable 
+      style={[styles.mainContainer, !!visited ? styles.visitedArrangement : [styles.notVisitedArrangement, styles.shadow]]} 
+      onPress={() => {
+        onPressStopInfo(index)
+      }}
+    >
         <View style={{flex : 3, flexWrap: 'wrap', flexShrink: 1}}>
             <View style={{flex : 3}}>
                 <MACTTextBold style={{ fontSize: 20, color: Colors.actBlue2, flexShrink: 1}}>{stopName}</MACTTextBold>
-                <MACTText>{stopDescripion}</MACTText>
+                <MACTText>{stopDescription}</MACTText>
             </View>
-            <VisitedLabel style={{flex : 1}} isVisited={isVisited}></VisitedLabel>
+            <VisitedLabel style={{flex : 1}} isVisited={visited}></VisitedLabel>
         </View>
         <View style={{flex : 1, flexDirection: 'column', alignItems: 'center', justifyContent:'center', alignItems:'center'}}>
             <View style={{flex: 2}}>
-              <IndexedMarker index={index}></IndexedMarker>
+              <IndexedMarker index={index+1}></IndexedMarker>
             </View>
-            <BussesInfoButton stopId={stopId}></BussesInfoButton>
+            <BussesInfoButton stopId={stopId} onPress={() => onPressBusInfo(index)}></BussesInfoButton>
         </View>
     </Pressable>
   )

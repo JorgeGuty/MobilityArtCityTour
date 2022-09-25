@@ -8,21 +8,22 @@ import NavigationMapExample from './examples/screens/NavigationMap.eg';
 import StopCardExample from './examples/screens/StopCard.eg';
 import IconButtonExample from './examples/styleguide/buttons/IconButton.eg';
 import SelectedRouteModalExample from './examples/screens/SelectedRouteModal.eg';
+import BusInfoModal from './screens/bus_info_modal/BusInfoModal';
+import BusInfoModalExample from './examples/screens/BusInfoModal.eg';
 
 const Stack = createNativeStackNavigator()
 
 
 export default function App() {
   return (
-    <NavigationContainer>
-      	<Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
-          <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
-        </Stack.Navigator>
-    </NavigationContainer>
-    /*<SafeAreaView style={{ flex: 1 }}>
-        <NavigationMapExample></NavigationMapExample>
-        <SelectedRouteModalExample></SelectedRouteModalExample>
-    </SafeAreaView>*/
+    // <NavigationContainer>
+    //   	<Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+    //       <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
+    //     </Stack.Navigator>
+    // </NavigationContainer>
+    <SafeAreaView style={{ flex: 1 }}>
+      <BusInfoModalExample></BusInfoModalExample>
+    </SafeAreaView>
   );
 }
 
