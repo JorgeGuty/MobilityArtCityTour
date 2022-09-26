@@ -62,5 +62,14 @@ export const styles = StyleSheet.create({
   },
   topSeparation:{
     marginTop:20
+  },
+  center:{
+    justifyContent:'center',
+    alignItems:'center',
+    alignContent:'center',
+    alignSelf:'center'
+  },
+  secondaryButton:{
+
   }
 })

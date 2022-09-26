@@ -54,9 +54,32 @@ const Login = ({ navigation }) => {
                     value={password}
                     placeholder="contraseña"
                 ></TextInput>
+
+                {/* Submit */}
+                <Pressable
+                    style={[GlobalStyles.button, styles.submitButton, GlobalStyles.bottomSeparation]}
+                    onPress={ () => loginValidation()}
+                >
+                    <MACTTextBold
+                        style={GlobalStyles.buttonLabel}
+                    >Iniciar sesión</MACTTextBold>
+                </Pressable>
+
+                <MACTText style={GlobalStyles.center}>¿No tienes una cuenta?</MACTText>
+
+                {/* Crear cuenta */}
+                <Pressable
+                    style={[GlobalStyles.button, GlobalStyles.bottomSeparation]}
+                    onPress={ () => navigation.navigate('SignUp')}
+                >
+                    <MACTTextBold
+                        style={GlobalStyles.buttonLabel}
+                    >Crear cuenta</MACTTextBold>
+                </Pressable>
+
                 {/* Olvidé mi contraseña */}
                 <Pressable
-                    style={styles.recoverPasswordLink}
+                    style={[GlobalStyles.center, GlobalStyles.bottomSeparation]}
                     onPress={ () => navigation.navigate('SendCode')}                
                 >
                     <MACTText
@@ -64,20 +87,11 @@ const Login = ({ navigation }) => {
                     >¿Ovidó su contraseña?</MACTText>
                 </Pressable>
 
-                {/* Submit */}
-                <Pressable
-                    style={[GlobalStyles.button, styles.submitButton]}
-                    onPress={ () => loginValidation()}
-                >
-                    <MACTTextBold
-                        style={GlobalStyles.buttonLabel}
-                    >Ingresar</MACTTextBold>
-                </Pressable>
 
                 {/* Cambiar contraseña */}
                 <Pressable
                     onPress={ () => navigation.navigate('ChangePassword')} 
-
+                    style={GlobalStyles.center}
                 >
                     <MACTText
                         style={[GlobalStyles.link, styles.link]}
