@@ -2,13 +2,24 @@ import { useEffect, useState, useRef } from 'react'
 import { Text, View } from 'react-native'
 import { Pressable } from 'react-native'
 import { Colors } from '../../../../constants/colors'
+import BusIcon from '../../../../assets/icons/boton_buseta.svg'
+import { styles } from './BussesInfoButton.style'
 
-const BussesInfoButton = ({ stopId }) => {
+const BussesInfoButton = ({ onPress }) => {
   
+  const [pressed, setPressed] = useState(false)
+
+  const onPressIn = () => {
+    setPressed(true)
+  }
+
+  const onPressOut = () => {
+    setPressed(false)
+  }
 
   return (
-    <Pressable style={{width:50, height:50, borderRadius:25, backgroundColor:Colors.actBlue2, flex: 1}}>
-
+    <Pressable onPressIn={onPressIn} onPressOut={onPressOut} onPress={onPress} style={{flex: 1, alignItems: 'center', justifyContent: 'center', }}>
+      <BusIcon height={40} width={40} style={!!pressed ? null : styles.shadow}></BusIcon>
     </Pressable>
   )
 }
