@@ -11,9 +11,14 @@ import * as Location from 'expo-location';
 
 import { Constants } from '../../../constants/constants';
 
-const NavigationMap = ({ initialRegion, stops, showStops }) => {
+const NavigationMap = ({ stops, showStops }) => {
 
-
+  const initialRegion = {
+    latitude: stops[0].latitude,
+    longitude: stops[0].longitude,
+    latitudeDelta: 0.0061,
+    longitudeDelta: 0.0061
+  }
 
   const [latitude, setLatitude] = useState(initialRegion.latitude)
   const [longitude, setLongitude] = useState(initialRegion.longitude)

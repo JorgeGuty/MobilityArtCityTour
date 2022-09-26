@@ -5,10 +5,14 @@ import { Dimensions } from 'react-native'
 export const styles = StyleSheet.create({
     mainContainer: {
         height: Dimensions.get('screen').height / 3, 
-        width:'100%', borderWidth: 1, position:'absolute', 
+        width:'100%', 
+        borderWidth: 1, 
+        position:'absolute', 
         bottom:0, 
         backgroundColor: Colors.actGray6, 
-        borderColor: Colors.actGray5
+        borderColor: Colors.actGray5,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
     },
     title: { 
         fontSize: 20, 

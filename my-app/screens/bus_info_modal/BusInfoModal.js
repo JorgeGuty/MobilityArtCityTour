@@ -1,59 +1,88 @@
 import { useEffect, useState, useRef } from 'react'
-import { View, Animated, Modal, Text, Pressable, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { SafeAreaView, ScrollView, View, Animated, Modal, Text, Pressable, Image, TouchableOpacity, Dimensions, FlatList } from 'react-native'
 import { styles } from './BusInfoModal.style'
-import { H5, MACTTextBold, Subtitle1 } from '../../constants/fonts'
+import { H5, MACTText, MACTTextBold, Subtitle1 } from '../../constants/fonts'
 import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
 import MyModal from '../../styleguide/modal/MyModal'
 
-const BusInfoModal = ({ stop, showModal, setShowModal }) => {
+// Simulation files
+import getSchedule from '../../simulations/GetSchedule.sim'
 
-  const serverScheduleData = {
-    schedule: ['8:00pm', '8:10pm', '8:20pm', '8:30pm']
+const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTranstalion }) => {
+
+  const getScheduleFromServer = async () => {
+    const data = await getSchedule(stopId)
+    setSchedule(data)
   }
 
-  const [schedule, setSchedule] = useState({})
+  const [schedule, setSchedule] = useState([])
 
   useEffect(() => {
-    setSchedule(serverScheduleData.schedule)
+    getScheduleFromServer()
   }, [])
 
   const renderHeader = () => {
 
     return (
-        <View style={{ flex:1 }}>
-          <View style={{  alignContent:'center', flexDirection: 'row', display:'flex', alignItems:'center' }}>
-
-            <MACTTextBold style={styles.headerTitle}>
-                Próximo bus:
-            </MACTTextBold>
-            
-            <MACTTextBold style = {styles.nextBusTime}>
-              {schedule[0]}
-            </MACTTextBold>
-          
-          </View>
-        </View>
+      <View style={styles.headerContainer}>
+          <MACTTextBold style={styles.headerTitle}>
+              {stopName}
+          </MACTTextBold>
+      </View>
     )
   }
 
   const renderBody = () => {
     return (
-      <View>
-
+      <View style={styles.bodyContainer}>
+        <View style={styles.nextBusInfoContainer}>
+          <MACTTextBold style={styles.nextBusLabel}>
+              Próximo bus:
+          </MACTTextBold>
+          <MACTTextBold style = {styles.nextBusTime}>
+            {schedule[0]}
+          </MACTTextBold>
+        </View>
+        <MACTText style={styles.completeScheduleLabel}>Siguientes buses:</MACTText>
+        <ScrollView
+          horizontal
+          style={{flex:1}}
+        >
+          {
+            schedule.map((time, index) => (
+              index != 0 
+              ? <View  
+                  key={index}
+                  style={styles.scheduleTimeCard}
+                >
+                  <MACTText style={styles.scheduleTimeLabel}>{time}</MACTText>
+                </View>
+              : null
+            ))
+          }
+        </ScrollView>
       </View>
     )
   }
   
-
   return (
-    <MyModal
-      setShowModal={setShowModal}
-      showModal={showModal}
-      modalHeight={0}
-      header={renderHeader()}
-      body={renderBody()}
-    ></MyModal>
+    <>
+      {
+        schedule !== [] 
+        ? 
+            <MyModal
+              setShowModal={setShowModal}
+              showModal={showModal}
+              yTranslationAmount={0}
+              modalHeight={Dimensions.get('screen').height / 3}
+              header={renderHeader()}
+              body={renderBody()}
+              startYTranstalion={startYTranstalion}
+            ></MyModal> 
+        : null
+      }
+    </>
   )
 }
 

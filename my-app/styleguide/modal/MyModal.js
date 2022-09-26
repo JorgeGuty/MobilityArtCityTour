@@ -1,21 +1,23 @@
 import { useEffect, useState, useRef } from 'react'
-import { View, Animated, Modal, Text, Pressable, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { ScrollView,View, Animated, Modal, Text, Pressable, Image, TouchableOpacity, Dimensions } from 'react-native'
 import { styles } from './MyModal.style'
 import { H5, MACTTextBold, Subtitle1 } from '../../constants/fonts'
 import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
 
-const MyModal = ({ showModal, setShowModal, modalHeight, header, body }) => {
+const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranstalion }) => {
 
-  const yTranslation = useRef(new Animated.Value(0)).current
+  const yTranslation = useRef(new Animated.Value(startYTranstalion)).current
+  const [scrollEnabled, setScrollEnabled] = useState(true)
+  const [xPressed, setXPressed] = useState(false)
 
   useEffect(() => {
-    !!showModal ? bringModal(modalHeight) : hideModal()
+    !!showModal === true ? bringModal(yTranslationAmount) : hideModal()
   }, [showModal])
 
   useEffect(() => {
-    bringModal(modalHeight)
-  },[modalHeight])
+    if (!!showModal) bringModal(yTranslationAmount)
+  },[yTranslationAmount])
   
   const hideModal = () => {
     Animated.sequence([
@@ -23,7 +25,7 @@ const MyModal = ({ showModal, setShowModal, modalHeight, header, body }) => {
         yTranslation,
         {
           toValue: Dimensions.get('screen').height,
-          duration: 1000,
+          duration: 700,
           useNativeDriver: true
         }
       )
@@ -36,37 +38,49 @@ const MyModal = ({ showModal, setShowModal, modalHeight, header, body }) => {
         yTranslation,
         {
           toValue: modalHeight,
-          duration: 1000,
+          duration: 700,
           useNativeDriver: true
         }
       )
     ]).start()
   }
 
+  
+
+  const onPressIn = () => {
+    setXPressed(true)
+  }
+
+  const onPressOut = () => {
+    setXPressed(false)
+  }
+
   return (
-    <Animated.View style={[styles.mainContainer, { transform: [{ translateY: yTranslation }]}]}>
-        <View style={{flexDirection:'column', flex:1}}>
-            {/* Header*/}
-            <View style={{flexDirection:'row'}}>
-              {/* Header content container */}
-              <View style={{ flex:1 }}>
-                {/** Header content */}
-                {header}
+      <Animated.View style={[styles.mainContainer, { transform: [{ translateY: yTranslation }], height: modalHeight}]}>
+          <View style={{flexDirection:'column', flex:1}}>
+              {/* Header*/}
+              <View style={{flexDirection:'row'}}>
+                {/* Header content container */}
+                <View style={{ flex:1 }}>
+                  {/** Header content */}
+                  {header}
+                </View>
+                <Pressable 
+                  style={styles.cancelX}
+                  onPress={ () => setShowModal(false) }
+                  onPressIn={onPressIn}
+                  onPressOut={onPressOut}
+                >
+                  <CancelX  style={!!xPressed ? null : styles.shadow} />
+                </Pressable>
               </View>
-              <Pressable 
-                style={styles.cancelX}
-                onPress={ () => setShowModal(false) }
-              >
-                <CancelX/>
-              </Pressable>
+              {/* Body container */}
+              <View style={{flex:1}}>
+                {/** Body */}
+                {body}
+              </View>
             </View>
-            {/* Body container */}
-            <View style={{flex:1}}>
-              {/** Body */}
-              {body}
-            </View>
-          </View>
-    </Animated.View>
+      </Animated.View>
   )
 }
 

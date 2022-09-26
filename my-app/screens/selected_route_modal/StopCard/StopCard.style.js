@@ -23,14 +23,14 @@ export const styles = StyleSheet.create({
   
       elevation: 1
     },
-  icon: {
-    color: Colors.business
-  },
-  indexLabel:{width : 40, height: 40, borderRadius: 20, borderWidth: 3, alignItems: 'center', borderColor: Colors.actBlue2, paddingVertical: 3},
-  visitedArrangement: {
-    backgroundColor: Colors.actGray5
-  },
-  notVisitedArrangement: {
-    backgroundColor: "white"
-  }
+    icon: {
+      color: Colors.business
+    },
+    indexLabel:{width : 40, height: 40, borderRadius: 20, borderWidth: 3, alignItems: 'center', borderColor: Colors.actBlue2, paddingVertical: 3},
+    visitedArrangement: {
+      backgroundColor: Colors.actGray5
+    },
+    notVisitedArrangement: {
+      backgroundColor: "white"
+    }
 })

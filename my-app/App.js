@@ -16,14 +16,14 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    // <NavigationContainer>
-    //   	<Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
-    //       <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
-    //     </Stack.Navigator>
-    // </NavigationContainer>
-    <SafeAreaView style={{ flex: 1 }}>
-      <BusInfoModalExample></BusInfoModalExample>
-    </SafeAreaView>
+    <NavigationContainer>
+      	<Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false}}>
+          <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
+        </Stack.Navigator>
+    </NavigationContainer>
+    // <SafeAreaView style={{ flex: 1 }}>
+    //   <BusInfoModalExample></BusInfoModalExample>
+    // </SafeAreaView>
   );
 }
 
