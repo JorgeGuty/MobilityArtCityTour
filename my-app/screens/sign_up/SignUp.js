@@ -28,6 +28,14 @@ const SignUp = ({ navigation }) => {
                     }
                     navigation.navigate('Login')
                 }
+            ).catch((error) =>
+                { 
+                    console.error(error)
+                    Alert.alert(
+                        "Error de servidor",
+                        "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+                    );
+                }
             )
         }
 

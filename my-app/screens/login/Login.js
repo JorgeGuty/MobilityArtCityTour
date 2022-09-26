@@ -26,7 +26,15 @@ const Login = ({ navigation }) => {
 
                 navigation.navigate('Home')
             }
-        )
+        ).catch((error) =>
+        { 
+            console.error(error)
+            Alert.alert(
+                "Error de servidor",
+                "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+            );
+        }
+    )
     }
 
     const renderContent = () => {
