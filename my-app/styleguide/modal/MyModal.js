@@ -5,9 +5,9 @@ import { H5, MACTTextBold, Subtitle1 } from '../../constants/fonts'
 import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
 
-const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranstalion }) => {
+const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranslation }) => {
 
-  const yTranslation = useRef(new Animated.Value(startYTranstalion)).current
+  const yTranslation = useRef(new Animated.Value(startYTranslation)).current
   const [scrollEnabled, setScrollEnabled] = useState(true)
   const [xPressed, setXPressed] = useState(false)
 

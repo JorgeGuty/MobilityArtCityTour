@@ -11,7 +11,7 @@ import * as Location from 'expo-location';
 
 import { Constants } from '../../../constants/constants';
 
-const NavigationMap = ({ stops, showStops }) => {
+const NavigationMap = ({ stops, showStops, onPressStop }) => {
 
   const initialRegion = {
     latitude: stops[0].latitude,
@@ -87,6 +87,7 @@ const NavigationMap = ({ stops, showStops }) => {
                   longitude: stop.longitude
                 }}
                 title={stop.name}
+                onPress={() => onPressStop(stop)}
               >
                 <IndexedMarker index={index+1}></IndexedMarker>
               </Marker>

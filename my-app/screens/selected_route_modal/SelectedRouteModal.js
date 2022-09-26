@@ -20,7 +20,7 @@ const SelectedRouteModal = ({ route, setRoute, onPressBusInfo, onPressStopInfo }
           onPressBusInfo={onPressBusInfo}
           onPressStopInfo={onPressStopInfo}
           stop={stop}
-          stopDescription={stop.description}
+          stopType={stop.type}
           visited={stop.visited}
           index={index} 
         />

@@ -9,7 +9,7 @@ import MyModal from '../../styleguide/modal/MyModal'
 // Simulation files
 import getSchedule from '../../simulations/GetSchedule.sim'
 
-const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTranstalion }) => {
+const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTranslation }) => {
 
   const getScheduleFromServer = async () => {
     const data = await getSchedule(stopId)
@@ -78,7 +78,7 @@ const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTransta
               modalHeight={Dimensions.get('screen').height / 3}
               header={renderHeader()}
               body={renderBody()}
-              startYTranstalion={startYTranstalion}
+              startYTranslation={startYTranslation}
             ></MyModal> 
         : null
       }

@@ -54,7 +54,7 @@ const BusInfoModalExample = () => {
                 stopId={clickedStop.id} 
                 showModal={showModal} 
                 setShowModal={setShowModal}
-                startYTranstalion={Dimensions.get('window').height}
+                startYTranslation={Dimensions.get('window').height}
             />
         </View>
     )

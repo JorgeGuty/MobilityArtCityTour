@@ -6,13 +6,11 @@ import Home from './screens/home/Home';
 import { SafeAreaView, ScrollView } from 'react-native';
 import NavigationMapExample from './examples/screens/NavigationMap.eg';
 import StopCardExample from './examples/screens/StopCard.eg';
-import IconButtonExample from './examples/styleguide/buttons/IconButton.eg';
 import SelectedRouteModalExample from './examples/screens/SelectedRouteModal.eg';
 import BusInfoModal from './screens/bus_info_modal/BusInfoModal';
 import BusInfoModalExample from './examples/screens/BusInfoModal.eg';
 
 const Stack = createNativeStackNavigator()
-
 
 export default function App() {
   return (

@@ -1,19 +1,21 @@
-import { View, Text } from "react-native"
+import { View, Text, Pressable } from "react-native"
 import { styles } from "./IndexedMarker.style"
 import Pin from '../../../assets/icons/pin_de_ubicacion.svg'; 
 
 const IndexedMarker = ({ index }) => {
 
     return (
-        <View style={{
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+        <Pressable 
+            style={{
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
+        >
             <Pin/>
             <Text style={styles.markerText}>
                   {index}
             </Text>
-        </View>
+        </Pressable>
     )
 }
 
