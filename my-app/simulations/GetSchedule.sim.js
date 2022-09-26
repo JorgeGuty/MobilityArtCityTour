@@ -1,6 +1,6 @@
+// Del próximo bus en adelante
 const data = ['8:00pm', '8:10pm', '8:20pm', '8:30pm']
   
-
 const getSchedule = (stopId) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -9,4 +9,4 @@ const getSchedule = (stopId) => {
     })
   }
   
-  export default getSchedule
+export default getSchedule
