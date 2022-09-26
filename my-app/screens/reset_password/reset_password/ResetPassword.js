@@ -9,11 +9,11 @@ import { useEffect, useState } from "react"
 import FlechaAtras from '../../../assets/icons/flecha_atras_azul.svg'
 
 const ResetPassword = ({ navigation, route }) => {
-    
+
     const email = route.params.email
 
     const renderContent = () => {
-        
+
         const [newPassword, setNewPassword] = useState('')
         const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('')
 
@@ -21,21 +21,23 @@ const ResetPassword = ({ navigation, route }) => {
 
         const resetPassword = () => {
             changePassword(email, newPassword).then(
-                (success) => {
-                    if(success){ 
-                        Alert.alert(
-                            "Éxito!",
-                            "La nueva contraseña fue guardada con éxito."
-                        );
-                        navigation.navigate('Login')
-                    }
-                    else {
+
+                (response) => {
+
+                    if (!response.ok) {
                         Alert.alert(
                             "Error",
                             "No se pudo guardar la nueva contraseña.\n Por favor intente con otro código"
                         );
                         navigation.navigate('SendCode')
+                        console.log(response);
                     }
+
+                    Alert.alert(
+                        "Éxito!",
+                        "La nueva contraseña fue guardada con éxito."
+                    );
+                    navigation.navigate('Login')
                 }
             )
         }
@@ -50,7 +52,7 @@ const ResetPassword = ({ navigation, route }) => {
                     >
                         Recuperar contraseña
                     </MACTTextBold>
-                    <Pressable 
+                    <Pressable
                         style={GlobalStyles.topCorner}
                         onPress={() => navigation.goBack()}
                     >
@@ -86,7 +88,7 @@ const ResetPassword = ({ navigation, route }) => {
             </View>
         )
     }
-    
+
     return (
         <LockedScreen content={renderContent()}/>
     )

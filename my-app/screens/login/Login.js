@@ -14,23 +14,24 @@ const Login = ({ navigation }) => {
     const loginValidation = () => {
         validateLogin(email, password)
         .then(
-            (success) => {
-                if (success) {
-                    navigation.navigate('Home')
-                }
-                else {
+            (response) => {
+
+                if (!response.ok) {
                     Alert.alert(
                         "Error de inicio de sesión",
                         "Correo electrónico  y/o contraseña inválidos.\nPor favor intente de nuevo."
-                      );
+                    );
+                    console.log(response);
                 }
+
+                navigation.navigate('Home')
             }
         )
     }
 
     const renderContent = () => {
         return (
-            <View 
+            <View
                 style={GlobalStyles.mainContainer}
             >
                 <MACTTextBold
@@ -57,7 +58,7 @@ const Login = ({ navigation }) => {
                 {/* Olvidé mi contraseña */}
                 <Pressable
                     style={styles.recoverPasswordLink}
-                    onPress={ () => navigation.navigate('SendCode')}                
+                    onPress={ () => navigation.navigate('SendCode')}
                 >
                     <MACTText
                         style={[GlobalStyles.link]}
@@ -76,7 +77,7 @@ const Login = ({ navigation }) => {
 
                 {/* Cambiar contraseña */}
                 <Pressable
-                    onPress={ () => navigation.navigate('ChangePassword')} 
+                    onPress={ () => navigation.navigate('ChangePassword')}
 
                 >
                     <MACTText
@@ -86,7 +87,7 @@ const Login = ({ navigation }) => {
             </View>
         )
     }
-    
+
     return (
         <LockedScreen content={renderContent()}/>
     )
