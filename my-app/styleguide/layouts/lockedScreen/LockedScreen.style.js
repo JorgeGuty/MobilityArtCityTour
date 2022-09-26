@@ -71,5 +71,13 @@ export const styles = StyleSheet.create({
   },
   secondaryButton:{
 
+  },
+  halfBottomSeparation:{
+    marginBottom:10
+  },
+  lineSeparation:{
+    height:1,
+    width:'100%',
+    backgroundColor:Colors.actGray4
   }
 })

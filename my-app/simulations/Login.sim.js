@@ -1,56 +1,52 @@
 
-export const validateLogin = (email, password) => {
-
-    //access to result by .json() method
-
-     return fetch('http://localhost:3001/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email, password: password})
-    });
-}
-
 export const signUp = (email, password) => {
 
-    //access to result by .json() method
-
-    return fetch('http://localhost:3001/signUp', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email, password: password})
-    });
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        ok:true
+      })
+    }, 333)
+  })
 }
 
-export const sendPasswordResetCode = (email) => {
-    return fetch('http://localhost:3001/requestCode', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email})
-    });
+
+export const validateLogin = (email, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        ok:true
+      })
+    }, 333)
+  })
 }
 
-export const validatePasswordResetCode = (email, code) => {
-    return fetch('http://localhost:3001/confirmCode', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email, code: code})
-    });
+export const sendPasswordResetCode = (email, password) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        ok:true
+      })
+    }, 333)
+  })
 }
 
-export const changePassword = (email, password, newPassword) => {
-    return fetch('http://localhost:3001/updatePassword', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email: email, password: password, newPassword: newPassword})
-    });
+export const validatePasswordResetCode = (code) => {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          ok:true
+        })
+      }, 333)
+  })
+}
+
+export const changePassword = (email, newPassword) => {
+  return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          ok:true
+        })
+      }, 333)
+  })
 }

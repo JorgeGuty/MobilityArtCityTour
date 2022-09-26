@@ -66,29 +66,16 @@ const Login = ({ navigation }) => {
 
                 {/* Submit */}
                 <Pressable
-                    style={[GlobalStyles.button, styles.submitButton, GlobalStyles.bottomSeparation]}
+                    style={[GlobalStyles.button, styles.submitButton, GlobalStyles.halfBottomSeparation]}
                     onPress={ () => loginValidation()}
                 >
                     <MACTTextBold
                         style={GlobalStyles.buttonLabel}
                     >Iniciar sesión</MACTTextBold>
                 </Pressable>
-
-                <MACTText style={GlobalStyles.center}>¿No tienes una cuenta?</MACTText>
-
-                {/* Crear cuenta */}
-                <Pressable
-                    style={[GlobalStyles.button, GlobalStyles.bottomSeparation]}
-                    onPress={ () => navigation.navigate('SignUp')}
-                >
-                    <MACTTextBold
-                        style={GlobalStyles.buttonLabel}
-                    >Crear cuenta</MACTTextBold>
-                </Pressable>
-
                 {/* Olvidé mi contraseña */}
                 <Pressable
-                    style={[GlobalStyles.center, GlobalStyles.bottomSeparation]}
+                    style={[GlobalStyles.center, GlobalStyles.halfBottomSeparation]}
                     onPress={ () => navigation.navigate('SendCode')}                
                 >
                     <MACTText
@@ -100,12 +87,30 @@ const Login = ({ navigation }) => {
                 {/* Cambiar contraseña */}
                 <Pressable
                     onPress={ () => navigation.navigate('ChangePassword')} 
-                    style={GlobalStyles.center}
+                    style={[GlobalStyles.center, GlobalStyles.bottomSeparation]}
                 >
                     <MACTText
                         style={[GlobalStyles.link, styles.link]}
                     >Cambiar contraseña</MACTText>
                 </Pressable>
+
+                <View style={[GlobalStyles.lineSeparation, GlobalStyles.bottomSeparation]}></View>
+
+                <MACTText style={GlobalStyles.center}>¿No tienes una cuenta?</MACTText>
+
+                
+
+                {/* Crear cuenta */}
+                <Pressable
+                    style={[GlobalStyles.button, GlobalStyles.bottomSeparation]}
+                    onPress={ () => navigation.navigate('SignUp')}
+                >
+                    <MACTTextBold
+                        style={GlobalStyles.buttonLabel}
+                    >Crear cuenta</MACTTextBold>
+                </Pressable>
+
+
             </View>
         )
     }
