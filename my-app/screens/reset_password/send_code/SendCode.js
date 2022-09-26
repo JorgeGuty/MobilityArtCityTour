@@ -35,6 +35,8 @@ const SendCode = ({ navigation }) => {
                 "Error de servidor",
                 "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
             );
+            navigation.navigate('Login')
+
         }
     )
     }

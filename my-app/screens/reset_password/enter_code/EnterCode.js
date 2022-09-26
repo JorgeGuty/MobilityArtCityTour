@@ -41,6 +41,20 @@ const EnterCode = ({ navigation, route }) => {
         )
     }
 
+    const resendCode = () => {
+        sendPasswordResetCode(email)
+        .catch(
+            (error) => { 
+                console.error(error)
+                Alert.alert(
+                    "Error de servidor",
+                    "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+                );
+                navigation.navigate('Login')
+            }
+        )
+    }
+
     const renderContent = () => {
         return (
             <View
@@ -71,7 +85,7 @@ const EnterCode = ({ navigation, route }) => {
                 {/* Olvidé mi contraseña */}
                 <Pressable
                     style={styles.recoverPasswordLink}
-                    onPress={ () => navigation.navigate('SendCode')}
+                    onPress={ () => sendPasswordResetCode(email)}
                 >
                     <MACTText
                         style={[GlobalStyles.link]}

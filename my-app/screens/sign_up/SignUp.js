@@ -27,6 +27,10 @@ const SignUp = ({ navigation }) => {
                         );
                     }
                     navigation.navigate('Login')
+                    Alert.alert(
+                        "Éxito!",
+                        "La cuenta fue creada con éxito, ahora puede iniciar sesión."
+                    );
                 }
             ).catch((error) =>
                 { 
@@ -35,6 +39,7 @@ const SignUp = ({ navigation }) => {
                         "Error de servidor",
                         "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
                     );
+                    navigation.navigate('Login')
                 }
             )
         }

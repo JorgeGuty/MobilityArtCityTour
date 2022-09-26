@@ -23,7 +23,6 @@ const Login = ({ navigation }) => {
                     );
                     console.log(response);
                 }
-
                 navigation.navigate('Home')
             }
         ).catch((error) =>
@@ -33,6 +32,8 @@ const Login = ({ navigation }) => {
                 "Error de servidor",
                 "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
             );
+            navigation.navigate('Login')
+
         }
     )
     }
