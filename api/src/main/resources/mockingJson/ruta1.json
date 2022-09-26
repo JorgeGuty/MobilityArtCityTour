@@ -1,0 +1,19 @@
+{
+  "id" : 1,
+  "nombre" : "Ruta Artística",
+  "descripcion" : "Esta es la ruta artística donde visitaras multiples centros de artes a lo largo de 4 paradas especiamente diseñadas para crear una experiencia inolvidable de la cultura en San José",
+  "paradas" : {
+    "parada1": {
+      "nombre" : "Museo de Arte Contemporáneo"
+    },
+    "parada2" : {
+      "nombre" : "Museo de Jade"
+    },
+    "parada3" : {
+      "nombre" : "Museo de Arte Indigena"
+    },
+    "parada4" : {
+      "nombre" : "Teatro Nacional"
+    }
+  }
+}
