@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "8d026ccd-5ba5-495a-9bcb-73c835ccf966",
+		"name": "MACT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1779864"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\",\r\n  \"password\" : \"1df665af68e057171a7077a17309569bd74311df28c3259dcfc6f9a5a45d9e09\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/signUp",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\",\r\n  \"password\" : \"1df665af68e057171a7077a17309569bd74311df28c3259dcfc6f9a5a45d9e09\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/signUp",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"signUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\",\r\n  \"password\" : \"1df665af68e057171a7077a17309569bd74311df28c3259dcfc6f9a5a45d9e09\",\r\n  \"newPassword\" : \"afe19fb1be2c8489a61c9d9222e46f06dd61b6545fab35653f3da0cb4733582d\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/updatePassword",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"updatePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/requestCode",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"requestCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\",\r\n  \"code\" : \"5225\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/confirmCode",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"confirmCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Recover Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\" : \"sebas_alpizar@hotmail.com\",\r\n  \"code\" : \"5225\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/confirmCode",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"confirmCode"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

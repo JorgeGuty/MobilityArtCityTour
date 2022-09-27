@@ -25,8 +25,7 @@ const SendCode = ({ navigation }) => {
                     );
                     console.log(response);
                 }
-
-                navigation.navigate('EnterCode', {email:email})
+                else navigation.navigate('EnterCode', {email:email})
             }
         ).catch((error) =>
         { 

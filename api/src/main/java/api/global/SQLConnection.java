@@ -7,9 +7,9 @@ import java.sql.*;
 
 public class SQLConnection {
 
-    private final String connectionString = "jdbc:sqlserver://192.168.1.19:1433;databaseName=MACT;encrypt=true;trustServerCertificate=true";
-    private final String user = "sa";
-    private final String password = "Str0ngPa$$w0rd";
+    private final String connectionString = "jdbc:sqlserver://172.26.160.1:1433;databaseName=MACT;encrypt=true;trustServerCertificate=true";
+    private final String user = "jg";
+    private final String password = "holamundo";
 
     private final static SQLConnection ourInstance = new SQLConnection();
 

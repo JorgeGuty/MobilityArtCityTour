@@ -23,7 +23,8 @@ const Login = ({ navigation }) => {
                     );
                     console.log(response);
                 }
-                navigation.navigate('Home')
+                else navigation.navigate('Home')
+                
             }
         ).catch((error) =>
         { 
@@ -62,6 +63,7 @@ const Login = ({ navigation }) => {
                     style={[GlobalStyles.textInput]}
                     onChangeText={setPassword}
                     value={password}
+                    secureTextEntry 
                     placeholder="contraseña"
                 ></TextInput>
 

@@ -26,11 +26,13 @@ const SignUp = ({ navigation }) => {
                             "El correo electrónico ingresado ya existe.\n Si tiene problemas iniciando sesión, recupere la clave de su cuenta."
                         );
                     }
-                    navigation.navigate('Login')
-                    Alert.alert(
-                        "Éxito!",
-                        "La cuenta fue creada con éxito, ahora puede iniciar sesión."
-                    );
+                    else {
+                        navigation.navigate('Login')
+                        Alert.alert(
+                            "Éxito!",
+                            "La cuenta fue creada con éxito, ahora puede iniciar sesión."
+                        );
+                    }
                 }
             ).catch((error) =>
                 { 
@@ -75,6 +77,7 @@ const SignUp = ({ navigation }) => {
                     style={[GlobalStyles.textInput, GlobalStyles.bottomSeparation]}
                     onChangeText={setPassword}
                     value={password}
+                    secureTextEntry 
                     placeholder="contraseña"
                 ></TextInput>
 

@@ -31,6 +31,9 @@ public class MainController {
      */
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> request(@RequestBody String body){
+
+        System.out.println("Request arrives");
+
         String email = JsonPath.parse(body).read("$.email");
         String passwordHashed = JsonPath.parse(body).read("$.password");
 

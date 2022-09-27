@@ -94,6 +94,7 @@ const ChangePassword = ({ navigation }) => {
                     onChangeText={setPassword}
                     value={password}
                     placeholder="contraseña actual"
+                    secureTextEntry                    
                 ></TextInput>
 
                 {/* Contraseña nueva */}
@@ -102,6 +103,7 @@ const ChangePassword = ({ navigation }) => {
                     onChangeText={setNewPassword}
                     value={newPassword}
                     placeholder="contraseña nueva"
+                    secureTextEntry 
                 ></TextInput>
 
                 {/* Contraseña nueva */}
@@ -110,6 +112,7 @@ const ChangePassword = ({ navigation }) => {
                     onChangeText={setNewPasswordConfirmation}
                     value={newPasswordConfirmation}
                     placeholder="confirmación contraseña nueva"
+                    secureTextEntry 
                 ></TextInput>
 
                 {/* Submit */}

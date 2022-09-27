@@ -2,11 +2,12 @@
 export const validateLogin = (email, password) => {
 
     //access to result by .json() method
-
-     return fetch('http://localhost:3001/login', {
+     console.log("validateLogin", email, password)
+     return fetch('http://172.26.160.1:3001/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"*",
         },
         body: JSON.stringify({email: email, password: password})
     });

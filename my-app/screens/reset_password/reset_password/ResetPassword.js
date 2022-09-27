@@ -75,6 +75,7 @@ const ResetPassword = ({ navigation, route }) => {
                     style={[GlobalStyles.textInput, GlobalStyles.bottomSeparation]}
                     onChangeText={setNewPassword}
                     value={newPassword}
+                    secureTextEntry 
                     placeholder="contraseña nueva"
                 ></TextInput>
 
@@ -83,6 +84,7 @@ const ResetPassword = ({ navigation, route }) => {
                     style={[GlobalStyles.textInput, GlobalStyles.doubleBottomSeparation]}
                     onChangeText={setNewPasswordConfirmation}
                     value={newPasswordConfirmation}
+                    secureTextEntry 
                     placeholder="confirmación contraseña nueva"
                 ></TextInput>
 

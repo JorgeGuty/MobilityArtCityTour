@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   textInput: {
     width:'100%',
     height:30,
-    borderRadius:20,
+    borderRadius:10,
     backgroundColor: Colors.actBlue4,
     paddingLeft: 20,
   },
