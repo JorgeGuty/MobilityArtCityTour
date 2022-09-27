@@ -26,9 +26,9 @@ const LockedScreen = ({content}) => {
                 }}
             >
                 <MACTTextBold
-                    style={styles.title}
+                    style={[styles.title, styles.center]}
                 >
-                    {'Movilidad \nArt City Tour'}
+                    {'   Movilidad \nArt City Tour'}
                 </MACTTextBold>
                 {content}
             </View>

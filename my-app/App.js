@@ -15,6 +15,7 @@ import ChangePassword from './screens/change_password/ChangePassword';
 import SendCode from './screens/reset_password/send_code/SendCode';
 import EnterCode from './screens/reset_password/enter_code/EnterCode';
 import ResetPassword from './screens/reset_password/reset_password/ResetPassword';
+import SignUp from './screens/sign_up/SignUp';
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +29,7 @@ export default function App() {
           <Stack.Screen name='SendCode' component={SendCode} options={{ animation: 'fade' }} />
           <Stack.Screen name='EnterCode' component={EnterCode} options={{ animation: 'fade' }} />
           <Stack.Screen name='ResetPassword' component={ResetPassword} options={{ animation: 'fade' }} />
+          <Stack.Screen name='SignUp' component={SignUp} options={{ animation: 'fade' }} />
         </Stack.Navigator>
     </NavigationContainer>
     // <SafeAreaView style={{ flex: 1 }}>

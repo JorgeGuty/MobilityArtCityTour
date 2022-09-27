@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import FlechaAtras from '../../../assets/icons/flecha_atras_azul.svg'
 
 const EnterCode = ({ navigation, route }) => {
-    
+
     const [code, setCode] = useState(0)
 
     const email = route.params.email
@@ -17,16 +17,40 @@ const EnterCode = ({ navigation, route }) => {
     const validateCode = () => {
         validatePasswordResetCode(code)
         .then(
-            (success) => {
-                if (success) {
-                    navigation.navigate('ResetPassword', {email:email})
-            }
-                else {
+
+            (response) => {
+
+                if (!response.ok) {
                     Alert.alert(
                         "Error",
                         "El código ingresado es inválido.\n Por favor, intente de nuevo o envíe otro código"
                     );
+                    console.log(response);
                 }
+
+                navigation.navigate('ResetPassword', {email:email})
+            }
+        ).catch(
+            (error) => { 
+                console.error(error)
+                Alert.alert(
+                    "Error de servidor",
+                    "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+                );
+            }
+        )
+    }
+
+    const resendCode = () => {
+        sendPasswordResetCode(email)
+        .catch(
+            (error) => { 
+                console.error(error)
+                Alert.alert(
+                    "Error de servidor",
+                    "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+                );
+                navigation.navigate('Login')
             }
         )
     }
@@ -42,7 +66,7 @@ const EnterCode = ({ navigation, route }) => {
                     >
                         Recuperar contraseña
                     </MACTTextBold>
-                    <Pressable 
+                    <Pressable
                         style={GlobalStyles.topCorner}
                         onPress={() => navigation.goBack()}
                     >
@@ -61,7 +85,7 @@ const EnterCode = ({ navigation, route }) => {
                 {/* Olvidé mi contraseña */}
                 <Pressable
                     style={styles.recoverPasswordLink}
-                    onPress={ () => navigation.navigate('SendCode')}                
+                    onPress={ () => sendPasswordResetCode(email)}
                 >
                     <MACTText
                         style={[GlobalStyles.link]}
@@ -80,7 +104,7 @@ const EnterCode = ({ navigation, route }) => {
             </View>
         )
     }
-    
+
     return (
         <LockedScreen content={renderContent()}/>
     )

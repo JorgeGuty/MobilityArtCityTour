@@ -14,23 +14,34 @@ const Login = ({ navigation }) => {
     const loginValidation = () => {
         validateLogin(email, password)
         .then(
-            (success) => {
-                if (success) {
-                    navigation.navigate('Home')
-                }
-                else {
+            (response) => {
+
+                if (!response.ok) {
                     Alert.alert(
                         "Error de inicio de sesión",
                         "Correo electrónico  y/o contraseña inválidos.\nPor favor intente de nuevo."
-                      );
+                    );
+                    console.log(response);
                 }
+                else navigation.navigate('Home')
+                
             }
-        )
+        ).catch((error) =>
+        { 
+            console.error(error)
+            Alert.alert(
+                "Error de servidor",
+                "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+            );
+            navigation.navigate('Login')
+
+        }
+    )
     }
 
     const renderContent = () => {
         return (
-            <View 
+            <View
                 style={GlobalStyles.mainContainer}
             >
                 <MACTTextBold
@@ -52,11 +63,22 @@ const Login = ({ navigation }) => {
                     style={[GlobalStyles.textInput]}
                     onChangeText={setPassword}
                     value={password}
+                    secureTextEntry 
                     placeholder="contraseña"
                 ></TextInput>
+
+                {/* Submit */}
+                <Pressable
+                    style={[GlobalStyles.button, styles.submitButton, GlobalStyles.halfBottomSeparation]}
+                    onPress={ () => loginValidation()}
+                >
+                    <MACTTextBold
+                        style={GlobalStyles.buttonLabel}
+                    >Iniciar sesión</MACTTextBold>
+                </Pressable>
                 {/* Olvidé mi contraseña */}
                 <Pressable
-                    style={styles.recoverPasswordLink}
+                    style={[GlobalStyles.center, GlobalStyles.halfBottomSeparation]}
                     onPress={ () => navigation.navigate('SendCode')}                
                 >
                     <MACTText
@@ -64,29 +86,38 @@ const Login = ({ navigation }) => {
                     >¿Ovidó su contraseña?</MACTText>
                 </Pressable>
 
-                {/* Submit */}
-                <Pressable
-                    style={[GlobalStyles.button, styles.submitButton]}
-                    onPress={ () => loginValidation()}
-                >
-                    <MACTTextBold
-                        style={GlobalStyles.buttonLabel}
-                    >Ingresar</MACTTextBold>
-                </Pressable>
 
                 {/* Cambiar contraseña */}
                 <Pressable
                     onPress={ () => navigation.navigate('ChangePassword')} 
-
+                    style={[GlobalStyles.center, GlobalStyles.bottomSeparation]}
                 >
                     <MACTText
                         style={[GlobalStyles.link, styles.link]}
                     >Cambiar contraseña</MACTText>
                 </Pressable>
+
+                <View style={[GlobalStyles.lineSeparation, GlobalStyles.bottomSeparation]}></View>
+
+                <MACTText style={GlobalStyles.center}>¿No tienes una cuenta?</MACTText>
+
+                
+
+                {/* Crear cuenta */}
+                <Pressable
+                    style={[GlobalStyles.button, GlobalStyles.bottomSeparation]}
+                    onPress={ () => navigation.navigate('SignUp')}
+                >
+                    <MACTTextBold
+                        style={GlobalStyles.buttonLabel}
+                    >Crear cuenta</MACTTextBold>
+                </Pressable>
+
+
             </View>
         )
     }
-    
+
     return (
         <LockedScreen content={renderContent()}/>
     )

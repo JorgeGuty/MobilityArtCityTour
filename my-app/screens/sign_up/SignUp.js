@@ -3,61 +3,45 @@ import { Colors } from "../../constants/colors"
 import { MACTText, MACTTextBold } from "../../constants/fonts"
 import LockedScreen from "../../styleguide/layouts/lockedScreen/LockedScreen"
 import { styles as GlobalStyles } from "../../styleguide/layouts/lockedScreen/LockedScreen.style"
-import { styles } from "./ChangePassword.style"
-import {validateLogin, changePassword} from '../../simulations/Login.sim'
+import { styles } from "./SignUp.style"
+import {validateLogin, changePassword, signUp} from '../../simulations/Login.sim'
 import { useEffect, useState } from "react"
 import FlechaAtras from '../../assets/icons/flecha_atras_azul.svg'
 
-const ChangePassword = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
     
     const renderContent = () => {
         
         const [email, setEmail] = useState('')
         const [password, setPassword] = useState('')
-        const [newPassword, setNewPassword] = useState('')
-        const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('')
+        const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
-        const [errorMessage, setErrorMessage] = useState('')
-
-        const passChangeValidation = () => {
-            validateLogin(email, password)
+        const createAccount = () => {
+            signUp(email, password)
             .then(
-                (success) => {
-                    if (success && newPassword === newPasswordConfirmation) {
-                        changePassword(email, newPassword).then(
-                            (success) => {
-                                if(success){                                 
-                                    Alert.alert(
-                                        "Éxito!",
-                                        "La nueva contraseña fue guardada con éxito."
-                                    );
-                                    navigation.navigate('Login')                                         
-                                }
-                                else {
-                                    Alert.alert(
-                                        "Error",
-                                        "No se pudo actualizar la contraseña, por favor inténtelo más tarde."
-                                    );
-                                }
-                            }
-                        )
+                (response) => {
+                    if (!response.ok) {
+                        Alert.alert(
+                            "Error al crear cuenta",
+                            "El correo electrónico ingresado ya existe.\n Si tiene problemas iniciando sesión, recupere la clave de su cuenta."
+                        );
                     }
                     else {
+                        navigation.navigate('Login')
                         Alert.alert(
-                            "Error",
-                            "Correo electrónico y/o contraseña inválidos.\nPor favor intente de nuevo."
+                            "Éxito!",
+                            "La cuenta fue creada con éxito, ahora puede iniciar sesión."
                         );
                     }
                 }
-            ).catch(
-                (error) => { 
+            ).catch((error) =>
+                { 
                     console.error(error)
                     Alert.alert(
                         "Error de servidor",
                         "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
                     );
                     navigation.navigate('Login')
-
                 }
             )
         }
@@ -70,7 +54,7 @@ const ChangePassword = ({ navigation }) => {
                     <MACTTextBold
                         style={GlobalStyles.subtitle}
                     >
-                        Cambiar contraseña
+                        Crear cuenta
                     </MACTTextBold>
                     <Pressable 
                         style={GlobalStyles.topCorner}
@@ -88,41 +72,31 @@ const ChangePassword = ({ navigation }) => {
                     placeholder="correo electrónico"
                 ></TextInput>
 
-                {/* Contraseña vieja */}
+                {/* Contraseña */}
                 <TextInput
                     style={[GlobalStyles.textInput, GlobalStyles.bottomSeparation]}
                     onChangeText={setPassword}
                     value={password}
-                    placeholder="contraseña actual"
-                    secureTextEntry                    
-                ></TextInput>
-
-                {/* Contraseña nueva */}
-                <TextInput
-                    style={[GlobalStyles.textInput, GlobalStyles.bottomSeparation]}
-                    onChangeText={setNewPassword}
-                    value={newPassword}
-                    placeholder="contraseña nueva"
                     secureTextEntry 
+                    placeholder="contraseña"
                 ></TextInput>
 
-                {/* Contraseña nueva */}
+                {/* Confirmación contraseña */}
                 <TextInput
                     style={[GlobalStyles.textInput, GlobalStyles.doubleBottomSeparation]}
-                    onChangeText={setNewPasswordConfirmation}
-                    value={newPasswordConfirmation}
-                    placeholder="confirmación contraseña nueva"
-                    secureTextEntry 
+                    onChangeText={setPasswordConfirmation}
+                    value={passwordConfirmation}
+                    placeholder="confirmación contraseña"
                 ></TextInput>
 
                 {/* Submit */}
                 <Pressable
                     style={[GlobalStyles.button]}
-                    onPress={ () => passChangeValidation()}
+                    onPress={ () => createAccount()}
                 >
                     <MACTTextBold
                         style={GlobalStyles.buttonLabel}
-                    >Cambiar contraseña</MACTTextBold>
+                    >Crear cuenta</MACTTextBold>
                 </Pressable>
             </View>
         )
@@ -133,4 +107,4 @@ const ChangePassword = ({ navigation }) => {
     )
 }
 
-export default ChangePassword
+export default SignUp
