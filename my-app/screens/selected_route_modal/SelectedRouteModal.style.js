@@ -5,6 +5,7 @@ import { Dimensions } from 'react-native'
 export const styles = StyleSheet.create({
     mainContainer: {
         height: Dimensions.get('screen').height / 3, 
+        maxHeight:260,
         width:'100%', 
         borderWidth: 1, 
         position:'absolute', 

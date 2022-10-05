@@ -7,6 +7,7 @@ import StopInfoModal from '../stop_info_modal/StopInfoModal'
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
+import HomeHeader from './header/HomeHeader'
 
 const Home = ({ navigation }) => {
 
@@ -15,6 +16,7 @@ const Home = ({ navigation }) => {
   const [showBusInfoModal, setShowBusInfoModal] = useState(false)
   const [showStopInfoModal, setShowStopInfoModal] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
+  const [modeToggler, setModeToggler] = useState(true)
 
   const getActiveRoutesFromServer = async () => {
     const data = await getActiveRoutes()
@@ -68,16 +70,24 @@ const Home = ({ navigation }) => {
         selectedRoute.stops != undefined 
         ? 
           <>
+            
             <NavigationMap  
               stops={selectedRoute.stops} 
-              showStops={showStops}
+              showStops={modeToggler}
               onPressStop={onPressStopInfo}
             />
+            
+            <HomeHeader
+              toggler={modeToggler}
+              setToggler={setModeToggler}
+            ></HomeHeader>
+
             <SelectedRouteModal 
               route={selectedRoute} 
               setRoute={setSelectedRoute}
               onPressBusInfo={onPressBusInfo} 
               onPressStopInfo={onPressStopInfo}
+              show={modeToggler}
             />
             <BusInfoModal 
                 stopName={clickedStop.name} 
@@ -86,13 +96,15 @@ const Home = ({ navigation }) => {
                 setShowModal={setShowBusInfoModal}
                 startYTranslation={Dimensions.get('window').height}
             />
-            <StopInfoModal 
-                stop={clickedStop}
-                showModal={showStopInfoModal} 
-                setShowModal={setShowStopInfoModal}
-                startYTranslation={Dimensions.get('window').height}
-                toggleStopVisited={toggleStopVisited}
-            />
+
+              <StopInfoModal 
+                  stop={clickedStop}
+                  showModal={showStopInfoModal} 
+                  setShowModal={setShowStopInfoModal}
+                  startYTranslation={Dimensions.get('window').height}
+                  toggleStopVisited={toggleStopVisited}
+              />
+
           </>
         : null
       }

@@ -16,6 +16,8 @@ import SendCode from './screens/reset_password/send_code/SendCode';
 import EnterCode from './screens/reset_password/enter_code/EnterCode';
 import ResetPassword from './screens/reset_password/reset_password/ResetPassword';
 import SignUp from './screens/sign_up/SignUp';
+import HomeHeader from './screens/home/header/HomeHeader';
+import HomeHeaderExample from './examples/screens/HomeHeader.eg';
 
 const Stack = createNativeStackNavigator()
 
@@ -33,7 +35,7 @@ export default function App() {
         </Stack.Navigator>
     </NavigationContainer>
     // <SafeAreaView style={{ flex: 1 }}>
-    //   <BusInfoModalExample></BusInfoModalExample>
+    //   <HomeHeaderExample></HomeHeaderExample>
     // </SafeAreaView>
   );
 }

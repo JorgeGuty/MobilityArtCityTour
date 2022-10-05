@@ -28,7 +28,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
   const currentLocationPinTranslation = useRef(new Animated.Value(0)).current
 
 
-  const animateCurrentLocationPin = () => {
+  const dropCurrentLocationPin = () => {
     Animated.sequence([
       Animated.timing(
         currentLocationPinTranslation,
@@ -41,8 +41,21 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
     ]).start()
   }
 
+  const liftCurrentLocationPin = () => {
+    Animated.sequence([
+      Animated.timing(
+        currentLocationPinTranslation,
+        {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true
+        }
+      )
+    ]).start()
+  }
+
   useEffect(() => {
-    !showStops ? animateCurrentLocationPin() : null
+    !!showStops ? liftCurrentLocationPin() : dropCurrentLocationPin()
   }, [showStops])
 
   const getLocationAsync = async () => {
