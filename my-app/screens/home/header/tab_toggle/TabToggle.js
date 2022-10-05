@@ -1,6 +1,6 @@
 import { Pressable, View } from "react-native"
 import { MACTText } from "../../../../constants/fonts"
-import { styles } from "./tabToggle.style"
+import { styles } from "./TabToggle.style"
 import { Colors } from '../../../../constants/colors';
 
 const TabToggle = ({toggler, setToggler}) => {

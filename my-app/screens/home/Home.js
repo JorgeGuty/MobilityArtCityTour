@@ -4,10 +4,15 @@ import SelectedRouteModal from '../selected_route_modal/SelectedRouteModal'
 import NavigationMap from './NavigationMap/NavigationMap'
 import BusInfoModal from '../bus_info_modal/BusInfoModal'
 import StopInfoModal from '../stop_info_modal/StopInfoModal'
+import InterestPointsHeader from '../interest_points_header/InterestPointsHeader'
+import HomeHeader from './header/HomeHeader'
+import InterestPointsModal from '../interest_points_modal/InterestPointsModal'
+import { Constants } from '../../constants/constants'
+
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
-import HomeHeader from './header/HomeHeader'
+import { getCategories } from '../../simulations/PointsOfInterest.sim'
 
 const Home = ({ navigation }) => {
 
@@ -17,14 +22,24 @@ const Home = ({ navigation }) => {
   const [showStopInfoModal, setShowStopInfoModal] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
+  
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState("")
 
   const getActiveRoutesFromServer = async () => {
     const data = await getActiveRoutes()
     setSelectedRoute(data[0])
   }
 
+  const getCategoriesFromServer = async () => {
+    const serverCategories = await getCategories()
+    setCategories(serverCategories)
+    setSelectedCategory(serverCategories[0])
+  }
+
   useEffect(()=>{
     getActiveRoutesFromServer()
+    getCategoriesFromServer()
   }, [])
 
   useEffect(()=>{
@@ -67,21 +82,32 @@ const Home = ({ navigation }) => {
   return (
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
-        selectedRoute.stops != undefined 
+        selectedRoute.stops != undefined && categories != []
         ? 
           <>
-            
             <NavigationMap  
               stops={selectedRoute.stops} 
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
             />
+
+            <InterestPointsHeader
+              show={!modeToggler}
+              categories={categories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
             
+
             <HomeHeader
               toggler={modeToggler}
               setToggler={setModeToggler}
             ></HomeHeader>
-
+          
+            <InterestPointsModal
+              show={!modeToggler}            
+            ></InterestPointsModal>
+          
             <SelectedRouteModal 
               route={selectedRoute} 
               setRoute={setSelectedRoute}
@@ -89,6 +115,8 @@ const Home = ({ navigation }) => {
               onPressStopInfo={onPressStopInfo}
               show={modeToggler}
             />
+
+
             <BusInfoModal 
                 stopName={clickedStop.name} 
                 stopId={clickedStop.id} 

@@ -4,8 +4,9 @@ import { Dimensions } from 'react-native'
 import { Constants } from '../../constants/constants'
 
 export const styles = StyleSheet.create({
-    mainContainer: {
-        height: Constants.selectedRouteModalRelativeHeight, 
+    modal: {
+        height: Constants.interestPointsModalRelativeHeight, 
+        maxHeight:260,
         width:'100%', 
         borderWidth: 1, 
         position:'absolute', 
@@ -15,15 +16,4 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
-    title: { 
-        fontSize: 20, 
-        color: Colors.actGray1, 
-        marginLeft:20, 
-        marginBottom: 5, 
-        marginTop: 10
-    },
-    stopsScroll:{ 
-        flex: 1, 
-        paddingBottom:30
-    }
 })

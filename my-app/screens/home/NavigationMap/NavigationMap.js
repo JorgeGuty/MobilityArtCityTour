@@ -33,7 +33,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
       Animated.timing(
         currentLocationPinTranslation,
         {
-          toValue: 100,
+          toValue: Constants.interestPointsModalRelativeHeight - 110,
           duration: 1000,
           useNativeDriver: true
         }
@@ -148,7 +148,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
 
       </MapView>
       <Animated.View style={{ transform: [{ translateY: currentLocationPinTranslation }] }}>
-        <Pressable onPress={getLocationAsync} style={{position: 'absolute', bottom: Dimensions.get('screen').height / 3 , alignSelf:'flex-end', padding: 20}}>
+        <Pressable onPress={getLocationAsync} style={{position: 'absolute', bottom:  Constants.selectedRouteModalRelativeHeight, alignSelf:'flex-end', padding: 20}}>
             <CurrentLocation height={40} width={40} style={styles.shadow}></CurrentLocation>
         </Pressable>
       </Animated.View>        

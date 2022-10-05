@@ -4,7 +4,7 @@ import { Colors } from "../../../constants/colors"
 import { MACTText } from "../../../constants/fonts"
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from "./HomeHeader.style";
-import TabToggle from "./tabToggle/tabToggle";
+import TabToggle from "./tab_toggle/TabToggle";
 
 const HomeHeader = ({toggler, setToggler}) => {
 
