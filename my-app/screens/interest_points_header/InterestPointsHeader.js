@@ -5,7 +5,7 @@ import { styles } from "./InterestPointsHeader.style"
 import Filters from "../../assets/icons/boton_filtros.svg"
 import CategoryTab from "./category_tab/CategoryTab"
 
-const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories}) => {
+const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories, filterPoints}) => {
 
     const headerVerticalTranslation = useRef(new Animated.Value(0)).current
 

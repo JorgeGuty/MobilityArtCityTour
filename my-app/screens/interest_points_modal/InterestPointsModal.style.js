@@ -16,4 +16,30 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
+    button:{
+        position:'absolute', 
+        bottom: Constants.interestPointsModalRelativeHeight + Constants.interestPointsModalButtonOffset,
+        alignSelf: 'center', 
+        borderRadius: 12,
+        backgroundColor: Colors.actBlue1,
+        paddingHorizontal: 32,
+        paddingVertical: 10,
+        flexDirection: 'row',
+        display:'flex',
+        justifyContent:'center',
+        alignContent: 'center',
+        alignItems:'center'
+    },
+    buttonLabel: {
+        fontSize: 16,
+        color: 'white',
+        marginLeft: 10
+    },
+    bodyContainer:{
+        marginTop: 15,
+        paddingRight: 15,
+        //borderWidth:1, 
+        paddingLeft: 15,
+        flex:1
+    }
 })

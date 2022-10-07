@@ -57,6 +57,7 @@ const StopInfoModal = ({ stop, showModal, setShowModal, startYTranslation, toggl
         header={renderHeader()}
         body={renderBody()}
         startYTranslation={startYTranslation}
+        includeX
     /> 
 
   )

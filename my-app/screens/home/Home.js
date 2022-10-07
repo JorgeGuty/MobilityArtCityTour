@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { Dimensions, Text, View } from 'react-native'
+import { Dimensions, Pressable, Text, View } from 'react-native'
 import SelectedRouteModal from '../selected_route_modal/SelectedRouteModal'
 import NavigationMap from './NavigationMap/NavigationMap'
 import BusInfoModal from '../bus_info_modal/BusInfoModal'
@@ -12,7 +12,7 @@ import { Constants } from '../../constants/constants'
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
-import { getCategories } from '../../simulations/PointsOfInterest.sim'
+import { getCategories, getPointsOfInterest } from '../../simulations/PointsOfInterest.sim'
 
 const Home = ({ navigation }) => {
 
@@ -26,6 +26,9 @@ const Home = ({ navigation }) => {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("")
 
+  const [points, setPoints] = useState([])
+  const [filteredPoints, setFilteredPoints] = useState([])
+
   const getActiveRoutesFromServer = async () => {
     const data = await getActiveRoutes()
     setSelectedRoute(data[0])
@@ -37,9 +40,20 @@ const Home = ({ navigation }) => {
     setSelectedCategory(serverCategories[0])
   }
 
+  const getPointsFromServer = async () => {
+    const serverPoints = await getPointsOfInterest()    
+    setFilteredPoints(serverPoints)
+    console.log("FILTERED POINTS", filteredPoints)
+  }
+
+  const filterPoints = (searchType, filters) => {
+    setFilteredPoints(points)
+  }
+
   useEffect(()=>{
     getActiveRoutesFromServer()
     getCategoriesFromServer()
+    getPointsFromServer()
   }, [])
 
   useEffect(()=>{
@@ -82,11 +96,13 @@ const Home = ({ navigation }) => {
   return (
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
-        selectedRoute.stops != undefined && categories != []
+        selectedRoute.stops !== undefined && categories !== [] && filteredPoints.length > 0
         ? 
           <>
+
             <NavigationMap  
               stops={selectedRoute.stops} 
+              interestPoints={filteredPoints}
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
             />
@@ -96,16 +112,19 @@ const Home = ({ navigation }) => {
               categories={categories}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
+              filterPoints={filterPoints}
             />
             
 
             <HomeHeader
               toggler={modeToggler}
               setToggler={setModeToggler}
+              filterPoints={filterPoints}
             ></HomeHeader>
           
             <InterestPointsModal
-              show={!modeToggler}            
+              show={!modeToggler}
+              points={filteredPoints}            
             ></InterestPointsModal>
           
             <SelectedRouteModal 

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         borderRadius: 15,
         width: Dimensions.get('screen').width / 2,
         height: 37.5,
-        alignSelf: 'center',
+
     },
     tabOption: {
         flex: 1,

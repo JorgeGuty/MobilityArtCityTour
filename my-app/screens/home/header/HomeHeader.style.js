@@ -10,7 +10,13 @@ export const styles = StyleSheet.create({
         height: Constants.homeHeaderHeight,
         width: '100%',
         backgroundColor: Colors.actGray6,
-        justifyContent:'flex-end',
+        flexDirection:'row',
+        justifyContent:'space-between',
         padding: 10
+    },
+    headerElement: {
+        alignSelf: 'flex-end'
     }
+
+
 });

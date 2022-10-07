@@ -79,6 +79,7 @@ const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTransla
               header={renderHeader()}
               body={renderBody()}
               startYTranslation={startYTranslation}
+              includeX
             ></MyModal> 
         : null
       }

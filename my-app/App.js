@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import Home from './screens/home/Home';
@@ -18,6 +18,7 @@ import ResetPassword from './screens/reset_password/reset_password/ResetPassword
 import SignUp from './screens/sign_up/SignUp';
 import HomeHeader from './screens/home/header/HomeHeader';
 import HomeHeaderExample from './examples/screens/HomeHeader.eg';
+import PlaceCardExample from './examples/screens/PlaceCard.eg';
 
 const Stack = createNativeStackNavigator()
 
@@ -34,8 +35,8 @@ export default function App() {
           <Stack.Screen name='SignUp' component={SignUp} options={{ animation: 'fade' }} />
         </Stack.Navigator>
     </NavigationContainer>
-    // <SafeAreaView style={{ flex: 1 }}>
-    //   <HomeHeaderExample></HomeHeaderExample>
+    // <SafeAreaView style={{ width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }}>
+    //   <PlaceCardExample></PlaceCardExample>
     // </SafeAreaView>
   );
 }
