@@ -1,0 +1,10 @@
+
+api/.idea/
+
+.idea/
+
+api/target/
+
+*.iml
+
+api/src/main/java/api/global/SQLConnection.java

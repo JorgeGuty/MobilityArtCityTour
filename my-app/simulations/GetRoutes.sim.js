@@ -108,4 +108,4 @@ const getActiveRoutes = () => {
     })
   }
   
-  export default getActiveRoutes
+export default getActiveRoutes

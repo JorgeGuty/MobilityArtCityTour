@@ -5,7 +5,7 @@ import { H5, MACTTextBold, Subtitle1 } from '../../constants/fonts'
 import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
 
-const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranslation }) => {
+const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranslation, includeX }) => {
 
   const yTranslation = useRef(new Animated.Value(startYTranslation)).current
   const [scrollEnabled, setScrollEnabled] = useState(true)
@@ -65,14 +65,17 @@ const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, hea
                   {/** Header content */}
                   {header}
                 </View>
-                <Pressable 
-                  style={styles.cancelX}
-                  onPress={ () => setShowModal(false) }
-                  onPressIn={onPressIn}
-                  onPressOut={onPressOut}
-                >
-                  <CancelX  style={!!xPressed ? null : styles.shadow} />
-                </Pressable>
+                {
+                  includeX &&
+                  <Pressable 
+                    style={styles.cancelX}
+                    onPress={ () => setShowModal(false) }
+                    onPressIn={onPressIn}
+                    onPressOut={onPressOut}
+                  >
+                    <CancelX  style={!!xPressed ? null : styles.shadow} />
+                  </Pressable>
+                }
               </View>
               {/* Body container */}
               <View style={{flex:1}}>

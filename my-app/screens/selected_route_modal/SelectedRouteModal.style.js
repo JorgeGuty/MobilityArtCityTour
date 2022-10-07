@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native'
 import { Colors } from '../../constants/colors'
 import { Dimensions } from 'react-native'
+import { Constants } from '../../constants/constants'
 
 export const styles = StyleSheet.create({
     mainContainer: {
-        height: Dimensions.get('screen').height / 3, 
+        height: Constants.selectedRouteModalRelativeHeight, 
         width:'100%', 
         borderWidth: 1, 
         position:'absolute', 

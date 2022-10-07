@@ -1,4 +1,4 @@
-import { Pressable, TextInput, View } from "react-native"
+import {Alert, Pressable, TextInput, View} from "react-native"
 import { Colors } from "../../../constants/colors"
 import { MACTText, MACTTextBold } from "../../../constants/fonts"
 import LockedScreen from "../../../styleguide/layouts/lockedScreen/LockedScreen"
@@ -9,24 +9,35 @@ import { useEffect, useState } from "react"
 import FlechaAtras from '../../../assets/icons/flecha_atras_azul.svg'
 
 const SendCode = ({ navigation }) => {
-    
+
     const [email, setEmail] = useState('')
 
     const sendCode = () => {
         sendPasswordResetCode(email)
+
         .then(
-            (success) => {
-                if (success) {
-                    navigation.navigate('EnterCode', {email:email})
-                }
-                else {
+            (response) => {
+
+                if (!response.ok) {
                     Alert.alert(
                         "Error",
                         "El correo electrónico no esta registrado en la aplicación.\nPor favor, intente de nuevo con otro correo."
                     );
+                    console.log(response);
                 }
+                else navigation.navigate('EnterCode', {email:email})
             }
-        )
+        ).catch((error) =>
+        { 
+            console.error(error)
+            Alert.alert(
+                "Error de servidor",
+                "Ocurrió un error en nuestros servidores, por favor intentar el trámite más tarde o contactar con un administrador."
+            );
+            navigation.navigate('Login')
+
+        }
+    )
     }
 
     const renderContent = () => {
@@ -40,7 +51,7 @@ const SendCode = ({ navigation }) => {
                     >
                         Recuperar contraseña
                     </MACTTextBold>
-                    <Pressable 
+                    <Pressable
                         style={GlobalStyles.topCorner}
                         onPress={() => navigation.goBack()}
                     >
@@ -68,7 +79,7 @@ const SendCode = ({ navigation }) => {
             </View>
         )
     }
-    
+
     return (
         <LockedScreen content={renderContent()}/>
     )

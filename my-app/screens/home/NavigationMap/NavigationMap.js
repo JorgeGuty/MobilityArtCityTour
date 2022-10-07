@@ -28,12 +28,25 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
   const currentLocationPinTranslation = useRef(new Animated.Value(0)).current
 
 
-  const animateCurrentLocationPin = () => {
+  const dropCurrentLocationPin = () => {
     Animated.sequence([
       Animated.timing(
         currentLocationPinTranslation,
         {
-          toValue: 100,
+          toValue: Constants.interestPointsModalRelativeHeight - 110,
+          duration: 1000,
+          useNativeDriver: true
+        }
+      )
+    ]).start()
+  }
+
+  const liftCurrentLocationPin = () => {
+    Animated.sequence([
+      Animated.timing(
+        currentLocationPinTranslation,
+        {
+          toValue: 0,
           duration: 1000,
           useNativeDriver: true
         }
@@ -42,7 +55,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
   }
 
   useEffect(() => {
-    !showStops ? animateCurrentLocationPin() : null
+    !!showStops ? liftCurrentLocationPin() : dropCurrentLocationPin()
   }, [showStops])
 
   const getLocationAsync = async () => {
@@ -135,7 +148,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
 
       </MapView>
       <Animated.View style={{ transform: [{ translateY: currentLocationPinTranslation }] }}>
-        <Pressable onPress={getLocationAsync} style={{position: 'absolute', bottom: Dimensions.get('screen').height / 3 , alignSelf:'flex-end', padding: 20}}>
+        <Pressable onPress={getLocationAsync} style={{position: 'absolute', bottom:  Constants.selectedRouteModalRelativeHeight, alignSelf:'flex-end', padding: 20}}>
             <CurrentLocation height={40} width={40} style={styles.shadow}></CurrentLocation>
         </Pressable>
       </Animated.View>        
