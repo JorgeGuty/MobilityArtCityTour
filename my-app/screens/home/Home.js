@@ -22,7 +22,7 @@ const Home = ({ navigation }) => {
   const [showStopInfoModal, setShowStopInfoModal] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
-  
+
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("")
 
@@ -41,7 +41,7 @@ const Home = ({ navigation }) => {
   }
 
   const getPointsFromServer = async () => {
-    const serverPoints = await getPointsOfInterest()    
+    const serverPoints = await getPointsOfInterest("")
     setFilteredPoints(serverPoints)
     console.log("FILTERED POINTS", filteredPoints)
   }
@@ -97,11 +97,11 @@ const Home = ({ navigation }) => {
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
         selectedRoute.stops !== undefined && categories !== [] && filteredPoints.length > 0
-        ? 
+        ?
           <>
 
-            <NavigationMap  
-              stops={selectedRoute.stops} 
+            <NavigationMap
+              stops={selectedRoute.stops}
               interestPoints={filteredPoints}
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
@@ -114,39 +114,39 @@ const Home = ({ navigation }) => {
               setSelectedCategory={setSelectedCategory}
               filterPoints={filterPoints}
             />
-            
+
 
             <HomeHeader
               toggler={modeToggler}
               setToggler={setModeToggler}
               filterPoints={filterPoints}
             ></HomeHeader>
-          
+
             <InterestPointsModal
               show={!modeToggler}
-              points={filteredPoints}            
+              points={filteredPoints}
             ></InterestPointsModal>
-          
-            <SelectedRouteModal 
-              route={selectedRoute} 
+
+            <SelectedRouteModal
+              route={selectedRoute}
               setRoute={setSelectedRoute}
-              onPressBusInfo={onPressBusInfo} 
+              onPressBusInfo={onPressBusInfo}
               onPressStopInfo={onPressStopInfo}
               show={modeToggler}
             />
 
 
-            <BusInfoModal 
-                stopName={clickedStop.name} 
-                stopId={clickedStop.id} 
-                showModal={showBusInfoModal} 
+            <BusInfoModal
+                stopName={clickedStop.name}
+                stopId={clickedStop.id}
+                showModal={showBusInfoModal}
                 setShowModal={setShowBusInfoModal}
                 startYTranslation={Dimensions.get('window').height}
             />
 
-              <StopInfoModal 
+              <StopInfoModal
                   stop={clickedStop}
-                  showModal={showStopInfoModal} 
+                  showModal={showStopInfoModal}
                   setShowModal={setShowStopInfoModal}
                   startYTranslation={Dimensions.get('window').height}
                   toggleStopVisited={toggleStopVisited}
@@ -155,7 +155,7 @@ const Home = ({ navigation }) => {
           </>
         : null
       }
-    
+
     </View>
   )
 }
