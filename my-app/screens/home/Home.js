@@ -8,11 +8,13 @@ import InterestPointsHeader from '../interest_points_header/InterestPointsHeader
 import HomeHeader from './header/HomeHeader'
 import InterestPointsModal from '../interest_points_modal/InterestPointsModal'
 import { Constants } from '../../constants/constants'
-
+import FilterPointsModal from '../filter_points_modal/FilterPointsModal'
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
 import { getCategories, getPointsOfInterest } from '../../simulations/PointsOfInterest.sim'
+import SearchPointsHeader from '../search_points_header/SearchPointsHeader'
+
 
 const Home = ({ navigation }) => {
 
@@ -20,6 +22,8 @@ const Home = ({ navigation }) => {
   const [showStops, setShowStops] = useState(true)
   const [showBusInfoModal, setShowBusInfoModal] = useState(false)
   const [showStopInfoModal, setShowStopInfoModal] = useState(false)
+  const [showFiltersModal, setShowFiltersModal] = useState(false)
+  const [showSearchHeader, setShowSearchHeader] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
   
@@ -42,12 +46,20 @@ const Home = ({ navigation }) => {
 
   const getPointsFromServer = async () => {
     const serverPoints = await getPointsOfInterest()    
-    setFilteredPoints(serverPoints)
-    console.log("FILTERED POINTS", filteredPoints)
+    setPoints([...serverPoints])
+    setFilteredPoints([...serverPoints])
   }
 
-  const filterPoints = (searchType, filters) => {
-    setFilteredPoints(points)
+  const filterPoints = (filters) => {
+    console.log(filters)
+  }
+
+  const searchPoints = (search) => {
+    console.log(search)
+  }
+
+  const resetPoints = () => {
+    setFilteredPoints([...points])
   }
 
   useEffect(()=>{
@@ -68,6 +80,10 @@ const Home = ({ navigation }) => {
   const onPressStopInfo = (stop) => {
     setClickedStop(stop)
     setShowStopInfoModal(true)
+  }
+
+  const onPressPoint = (point) => {
+    console.log(point.placeName)
   }
 
   const toggleStopVisited = (stop) => {
@@ -105,6 +121,7 @@ const Home = ({ navigation }) => {
               interestPoints={filteredPoints}
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
+              onPressPoint={onPressPoint}
             />
 
             <InterestPointsHeader
@@ -112,16 +129,23 @@ const Home = ({ navigation }) => {
               categories={categories}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
-              filterPoints={filterPoints}
+              setShowFiltersModal={setShowFiltersModal}
             />
             
-
             <HomeHeader
               toggler={modeToggler}
               setToggler={setModeToggler}
               filterPoints={filterPoints}
+              setShowSearchHeader={setShowSearchHeader}
             ></HomeHeader>
           
+            <SearchPointsHeader
+              show={showSearchHeader}
+              searchPoints={searchPoints}
+              setShow={setShowSearchHeader}
+              resetPoints={resetPoints}
+            ></SearchPointsHeader>
+
             <InterestPointsModal
               show={!modeToggler}
               points={filteredPoints}            
@@ -144,13 +168,20 @@ const Home = ({ navigation }) => {
                 startYTranslation={Dimensions.get('window').height}
             />
 
-              <StopInfoModal 
-                  stop={clickedStop}
-                  showModal={showStopInfoModal} 
-                  setShowModal={setShowStopInfoModal}
-                  startYTranslation={Dimensions.get('window').height}
-                  toggleStopVisited={toggleStopVisited}
-              />
+            <StopInfoModal 
+                stop={clickedStop}
+                showModal={showStopInfoModal} 
+                setShowModal={setShowStopInfoModal}
+                startYTranslation={Dimensions.get('window').height}
+                toggleStopVisited={toggleStopVisited}
+            />
+
+            <FilterPointsModal
+              setShowModal={setShowFiltersModal}
+              showModal={showFiltersModal}
+              startYTranslation={Dimensions.get('window').height}
+              filterItems={filterPoints}
+            />
 
           </>
         : null

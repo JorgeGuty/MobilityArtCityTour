@@ -4,6 +4,7 @@ import { styles } from './MyModal.style'
 import { H5, MACTTextBold, Subtitle1 } from '../../constants/fonts'
 import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
+import { Constants } from '../../constants/constants'
 
 const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, header, body, startYTranslation, includeX }) => {
 
@@ -25,7 +26,7 @@ const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, hea
         yTranslation,
         {
           toValue: Dimensions.get('screen').height,
-          duration: 700,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )
@@ -38,7 +39,7 @@ const MyModal = ({ showModal, setShowModal, modalHeight, yTranslationAmount, hea
         yTranslation,
         {
           toValue: modalHeight,
-          duration: 700,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )

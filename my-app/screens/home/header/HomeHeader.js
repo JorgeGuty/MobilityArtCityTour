@@ -7,8 +7,9 @@ import { styles } from "./HomeHeader.style";
 import TabToggle from "./tab_toggle/TabToggle";
 import BotonBuscar from '../../../assets/icons/boton_buscar.svg'
 import BotonMenu from '../../../assets/icons/boton_menu.svg'
+import { Constants } from "../../../constants/constants";
 
-const HomeHeader = ({toggler, setToggler, filterPoints}) => {
+const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader}) => {
 
     const [active, setActive] = useState(true)
 
@@ -21,7 +22,7 @@ const HomeHeader = ({toggler, setToggler, filterPoints}) => {
           searchButtonTranslation,
           {
             toValue: 0,
-            duration: 1000,
+            duration: Constants.animationsDuration,
             useNativeDriver: true
           }
         )
@@ -34,7 +35,7 @@ const HomeHeader = ({toggler, setToggler, filterPoints}) => {
           searchButtonTranslation,
           {
             toValue: Dimensions.get('screen').width,
-            duration: 1000,
+            duration: Constants.animationsDuration,
             useNativeDriver: true
           }
         )
@@ -69,7 +70,9 @@ const HomeHeader = ({toggler, setToggler, filterPoints}) => {
                     { transform: [{ translateX: searchButtonTranslation }] }
                 ]}
             >
-                <Pressable>
+                <Pressable
+                  onPress={() => setShowSearchHeader(true)}
+                >
                     <BotonBuscar></BotonBuscar>
                 </Pressable>
             </Animated.View>

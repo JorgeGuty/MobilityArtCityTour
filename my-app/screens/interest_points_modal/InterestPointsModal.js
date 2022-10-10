@@ -21,7 +21,7 @@ const InterestPointsModal = ({show, points}) => {
           buttonVerticalTranslation,
           {
             toValue: Dimensions.get('screen').height,
-            duration: 1000,
+            duration: Constants.animationsDuration,
             useNativeDriver: true
           }
         )
@@ -34,7 +34,7 @@ const InterestPointsModal = ({show, points}) => {
           buttonVerticalTranslation,
           {
             toValue: translation,
-            duration: 1000,
+            duration: Constants.animationsDuration,
             useNativeDriver: true
           }
         )

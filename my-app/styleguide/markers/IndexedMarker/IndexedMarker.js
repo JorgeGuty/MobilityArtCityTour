@@ -1,6 +1,6 @@
 import { View, Text, Pressable } from "react-native"
 import { styles } from "./IndexedMarker.style"
-import Pin from '../../../assets/icons/pin_de_ubicacion.svg'; 
+import Pin from '../../../assets/icons/pin_parada.svg'; 
 
 const IndexedMarker = ({ index }) => {
 

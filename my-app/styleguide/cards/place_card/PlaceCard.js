@@ -3,11 +3,8 @@ import { Animated, Image, View } from "react-native"
 import { Colors } from "../../../constants/colors"
 import { MACTTextBold, MACTText } from "../../../constants/fonts"
 import { styles } from "./PlaceCard.style"
-
+import { Constants } from "../../../constants/constants"
 const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
-
-    const minFlex = 4
-    const maxFlex = 1
 
     const minHeight = 75
     const maxHeight = 200
@@ -21,7 +18,7 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
         Animated.timing(
             height, {
             toValue: minHeight,
-            duration: 700,
+            duration: Constants.animationsDuration,
             useNativeDriver: false,
         }).start();        
         setIsMaximized(false)        
@@ -32,7 +29,7 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
         Animated.timing(
             height, {
             toValue: maxHeight,
-            duration: 700,
+            duration: Constants.animationsDuration,
             useNativeDriver: false,
         }).start();        
         setIsMaximized(true)

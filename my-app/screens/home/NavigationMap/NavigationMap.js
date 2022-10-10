@@ -10,8 +10,9 @@ import { Animated } from 'react-native';
 import * as Location from 'expo-location';
 
 import { Constants } from '../../../constants/constants';
+import SimpleMarker from '../../../styleguide/markers/SimpleMarker/SimpleMarker';
 
-const NavigationMap = ({ stops, showStops, onPressStop }) => {
+const NavigationMap = ({ stops, interestPoints, showStops, onPressStop, onPressPoint }) => {
 
   const initialRegion = {
     latitude: stops[0].latitude,
@@ -34,7 +35,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
         currentLocationPinTranslation,
         {
           toValue: Constants.interestPointsModalRelativeHeight - 110,
-          duration: 1000,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )
@@ -47,7 +48,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
         currentLocationPinTranslation,
         {
           toValue: 0,
-          duration: 1000,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )
@@ -87,6 +88,28 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
         ]  
     );  
   }  
+
+  const renderPoints = () => {
+    return (
+      <>
+        {
+          interestPoints.map((point, index) => (
+              <Marker
+                key={"M"+index}
+                coordinate={{
+                  latitude: point.location.latitude,
+                  longitude: point.location.longitude
+                }}
+                title={point.placeName}
+                onPress={() => onPressPoint(point)}
+              >
+                <SimpleMarker point={point} onPress={onPressPoint}></SimpleMarker>
+              </Marker>
+          ))
+        }
+      </>   
+    ) 
+  }
 
   const renderStops = () => {
     return (
@@ -143,7 +166,7 @@ const NavigationMap = ({ stops, showStops, onPressStop }) => {
           initialRegion={initialRegion}
       >
         {
-          !!showStops ? renderStops() : null
+          !! showStops ? renderStops() : renderPoints()
         }
 
       </MapView>

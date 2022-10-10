@@ -4,8 +4,9 @@ import { Constants } from "../../constants/constants"
 import { styles } from "./InterestPointsHeader.style"
 import Filters from "../../assets/icons/boton_filtros.svg"
 import CategoryTab from "./category_tab/CategoryTab"
+import FilterButton from "../../styleguide/buttons/filter_button/FilterButton"
 
-const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories, filterPoints}) => {
+const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories, setShowFiltersModal}) => {
 
     const headerVerticalTranslation = useRef(new Animated.Value(0)).current
 
@@ -15,7 +16,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
             headerVerticalTranslation,
             {
               toValue: 0,
-              duration: 1000,
+              duration: Constants.animationsDuration,
               useNativeDriver: true
             }
           )
@@ -28,7 +29,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
             headerVerticalTranslation,
             {
               toValue: Constants.homeHeaderHeight,
-              duration: 1000,
+              duration: Constants.animationsDuration,
               useNativeDriver: true
             }
           )
@@ -42,12 +43,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
 
     return (
       <Animated.View style={[styles.header, { transform: [{ translateY: headerVerticalTranslation }] }]}>
-        <Pressable
-          style={styles.filters}
-          onPress={() => console.log('FILTERS')}	
-        >
-          <Filters height={35} width={35}/>
-        </Pressable>
+        <FilterButton setShowFiltersModal={setShowFiltersModal}/>
         <ScrollView 
           style={styles.categories}
           horizontal

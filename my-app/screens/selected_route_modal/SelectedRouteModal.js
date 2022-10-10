@@ -4,7 +4,7 @@ import { Colors } from '../../constants/colors'
 import { MACTTextBold } from '../../constants/fonts'
 import StopCard from './StopCard/StopCard'
 import { styles } from './SelectedRouteModal.style'
-
+import { Constants } from '../../constants/constants'
 const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) => { 
   
   const modalVerticalTranslation = useRef(new Animated.Value(0)).current
@@ -16,7 +16,7 @@ const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) =>
         modalVerticalTranslation,
         {
           toValue: Dimensions.get('screen').height,
-          duration: 1000,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )
@@ -29,7 +29,7 @@ const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) =>
         modalVerticalTranslation,
         {
           toValue: 0,
-          duration: 1000,
+          duration: Constants.animationsDuration,
           useNativeDriver: true
         }
       )

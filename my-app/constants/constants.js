@@ -19,5 +19,6 @@ export const Constants = {
     elevation: 1
   },
   verLista:'Ver Lista',
-  verMapa:'Ver Mapa'
+  verMapa:'Ver Mapa',
+  animationsDuration: 500,
 }
