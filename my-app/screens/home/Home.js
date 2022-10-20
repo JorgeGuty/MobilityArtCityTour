@@ -12,7 +12,7 @@ import FilterPointsModal from '../filter_points_modal/FilterPointsModal'
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
-import { getCategories, getPointsOfInterest } from '../../simulations/PointsOfInterest.sim'
+import { getCategories, getPointsOfInterest } from '../../servercalls/PointsOfInterest.calls.js'
 import SearchPointsHeader from '../search_points_header/SearchPointsHeader'
 
 
@@ -45,9 +45,11 @@ const Home = ({ navigation }) => {
   }
 
   const getPointsFromServer = async () => {
-    const serverPoints = await getPointsOfInterest()    
-    setPoints([...serverPoints])
-    setFilteredPoints([...serverPoints])
+    //TODO: Poner coordenadas pormedio de la ruta
+    const serverPoints = await getPointsOfInterest(9.933102329459889.toString(), -84.07883146031479.toString(), (1500).toString(), "restaurant")
+    console.log(serverPoints)
+    setPoints([...serverPoints.results])
+    setFilteredPoints([...serverPoints.results])
   }
 
   const filterPoints = (filters) => {
