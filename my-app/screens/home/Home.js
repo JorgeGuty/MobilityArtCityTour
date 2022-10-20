@@ -12,7 +12,7 @@ import FilterPointsModal from '../filter_points_modal/FilterPointsModal'
 
 // Simulation Files
 import getActiveRoutes from '../../simulations/GetRoutes.sim'
-import { getCategories, getPointsOfInterest } from '../../servercalls/PointsOfInterest.calls.js'
+import { getCategories, getPointsOfInterest, textSearch } from '../../servercalls/PointsOfInterest.calls.js'
 import SearchPointsHeader from '../search_points_header/SearchPointsHeader'
 
 
@@ -50,17 +50,21 @@ const Home = ({ navigation }) => {
   const getPointsFromServer = async () => {
     //TODO: Poner coordenadas pormedio de la ruta
     const serverPoints = await getPointsOfInterest(9.933102329459889.toString(), -84.07883146031479.toString(), (1500).toString(), "restaurant")
-    console.log(serverPoints)
     setPoints([...serverPoints.results])
     setFilteredPoints([...serverPoints.results])
   }
 
   const filterPoints = (filters) => {
-    console.log(filters)
+    let filtersResult = points
+    filters.forEach(filter => {      
+      filtersResult = filtersResult.filter(point => point[filter.value] === filter.seeks)
+    })
+    setFilteredPoints(filtersResult)
   }
 
   const searchPoints = (search) => {
-    console.log(search)
+    let searchResult = points.filter(point => point.placeName.includes(search, 0) || point.category[0].includes(search, 0))
+    setFilteredPoints(searchResult)
   }
 
   const resetPoints = () => {
@@ -121,7 +125,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
-        selectedRoute.stops !== undefined && categories !== [] && filteredPoints.length > 0
+        selectedRoute.stops !== undefined && categories !== [] //&& filteredPoints.length > 0
         ? 
           <>
 
