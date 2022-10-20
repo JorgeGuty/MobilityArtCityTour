@@ -11,7 +11,7 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
 
     const [filterSelected, setFilterSelected] = useState(false)
     const [filterIsOpen, setFilterIsOpen] = useState(false)
-
+    const [selectedFilters, setSelectedFilters] = useState([])
     const availableFilters = [
         {
           filterName:  "Abiertos ahora",
@@ -28,13 +28,23 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
             !! filter.variable ? selectedFilters.push({value: filter.value, seeks: filter.seeks}) : null
         })
         selectedFilters.length > 0 ? setFilterSelected(true) : setFilterSelected(false)
-        filterItems(selectedFilters)
     }, [availableFilters])
 
     const clearFilters = () => {
         availableFilters.forEach((filter) => {
             filter.setter(false)
         })    
+        filterItems([])
+    }
+
+    const filter = () => {
+        let selectedFilters = []
+        availableFilters.forEach((filter) => {
+            !! filter.variable ? selectedFilters.push({value: filter.value, seeks: filter.seeks}) : null
+        })
+        selectedFilters.length > 0 ? setFilterSelected(true) : setFilterSelected(false)
+        filterItems(selectedFilters)
+        setShowModal(false)
     }
 
     const renderHeader = () => {
@@ -91,7 +101,7 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
                     </Pressable>
                     <Pressable
                         style={[styles.button, !! filterSelected ? styles.showResultsButton : null ]}
-                        onPress={() => setShowModal(false)}
+                        onPress={filter}
                     >
                         {
                             filterSelected 

@@ -7,7 +7,7 @@ import { Constants } from "../../../constants/constants"
 const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
 
     const minHeight = 75
-    const maxHeight = 200
+    const maxHeight = 250
 
     const [isMaximized, setIsMaximized] = useState(startMaximized ? true : false)
 
@@ -41,6 +41,21 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
         !!startMaximized ? maximize() : minimize()
     }, [])
 
+    const formatCategory = (category) => {
+        category = category.replace(/^\w/, c => c.toUpperCase())
+        category = category.replace("_", " ")
+
+        return category.replace(/^\w/, c => c.toUpperCase())
+    }
+
+    const formatEconomicCategory = (economicCategory) => {
+        let string = ''
+        for (let point = 0; point < economicCategory; point++){
+            string += '$'
+        }
+        return string
+    }
+
     return (
         <Animated.View
             style = {[
@@ -48,7 +63,7 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
                 {
                     height: height,
                     padding: height.interpolate({
-                        inputRange: [75, 200],
+                        inputRange: [minHeight, maxHeight],
                         outputRange:[0, 15]
                     }),
                 }
@@ -67,7 +82,7 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
                     styles.infoBox,
                     {
                         flex: height.interpolate({
-                            inputRange: [75, 200],
+                            inputRange: [minHeight, maxHeight],
                             outputRange:[4, 1]
                         })
                     }
@@ -77,21 +92,21 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
                     style={styles.title}
                 >
                     <MACTTextBold style={{ fontSize: 20, color: Colors.actBlue2, flexShrink: 1}}>{place.placeName}</MACTTextBold>
-                    <MACTText>{place.category}</MACTText>
+                    <MACTText>{formatCategory(place.category[0])}</MACTText>
                 </View>
                 <Animated.View
                     style={[
                         styles.relevantInfo,
                         {
                             opacity: height.interpolate({
-                                inputRange: [75, 200],
+                                inputRange: [minHeight, maxHeight],
                                 outputRange:[0, 1]                            
                             })
                         }
                     ]}                
                 >
                     <MACTText style={styles.openState}>{place.isOpen ? 'Abierto' : 'Cerrado'}</MACTText>
-                    <MACTText>{place.economicCategory}</MACTText>
+                    <MACTText>{formatEconomicCategory(place.economicCategory)}</MACTText>
                 </Animated.View>
             </Animated.View>
         </Animated.View>

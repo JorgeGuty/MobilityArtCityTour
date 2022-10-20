@@ -69,6 +69,7 @@ const InterestPointsModal = ({show, points}) => {
                 return (
                   <PlaceCard
                     key={index}
+                    startMaximized={showFull}
                     sizeToggler={!showFull}
                     place={point}
                   />
