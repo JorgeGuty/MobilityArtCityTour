@@ -29,7 +29,7 @@ const Home = ({ navigation }) => {
   const [showSearchHeader, setShowSearchHeader] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
-  
+
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState("")
 
@@ -47,16 +47,17 @@ const Home = ({ navigation }) => {
     setSelectedCategory(serverCategories[0])
   }
 
-  const getPointsFromServer = async () => {
+  const getPointsFromServer = async (category) => {
     //TODO: Poner coordenadas pormedio de la ruta
-    const serverPoints = await getPointsOfInterest(9.933102329459889.toString(), -84.07883146031479.toString(), (1500).toString(), "restaurant")
+    category+="";
+    const serverPoints = await getPointsOfInterest(9.933102329459889.toString(), -84.07883146031479.toString(), (1500).toString(), category)
     setPoints([...serverPoints.results])
     setFilteredPoints([...serverPoints.results])
   }
 
   const filterPoints = (filters) => {
     let filtersResult = points
-    filters.forEach(filter => {      
+    filters.forEach(filter => {
       filtersResult = filtersResult.filter(point => point[filter.value] === filter.seeks)
     })
     setFilteredPoints(filtersResult)
@@ -80,6 +81,10 @@ const Home = ({ navigation }) => {
   useEffect(()=>{
     console.log("Changed selected route")
   }, [selectedRoute])
+
+  useEffect(()=>{
+    getPointsFromServer(selectedCategory)
+  }, [selectedCategory])
 
   const onPressBusInfo = (stop) => {
     setClickedStop(stop)
@@ -126,11 +131,11 @@ const Home = ({ navigation }) => {
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
         selectedRoute.stops !== undefined && categories !== [] //&& filteredPoints.length > 0
-        ? 
+        ?
           <>
 
-            <NavigationMap  
-              stops={selectedRoute.stops} 
+            <NavigationMap
+              stops={selectedRoute.stops}
               interestPoints={filteredPoints}
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
@@ -144,7 +149,7 @@ const Home = ({ navigation }) => {
               setSelectedCategory={setSelectedCategory}
               setShowFiltersModal={setShowFiltersModal}
             />
-            
+
             <HomeHeader
               toggler={modeToggler}
               setToggler={setModeToggler}
@@ -152,7 +157,7 @@ const Home = ({ navigation }) => {
               setShowSearchHeader={setShowSearchHeader}
               goToMenu={navigateToMenu}
             ></HomeHeader>
-          
+
             <SearchPointsHeader
               show={showSearchHeader}
               searchPoints={searchPoints}
@@ -162,29 +167,29 @@ const Home = ({ navigation }) => {
 
             <InterestPointsModal
               show={!modeToggler}
-              points={filteredPoints}            
+              points={filteredPoints}
             ></InterestPointsModal>
-          
-            <SelectedRouteModal 
-              route={selectedRoute} 
+
+            <SelectedRouteModal
+              route={selectedRoute}
               setRoute={setSelectedRoute}
-              onPressBusInfo={onPressBusInfo} 
+              onPressBusInfo={onPressBusInfo}
               onPressStopInfo={onPressStopInfo}
               show={modeToggler}
             />
 
 
-            <BusInfoModal 
-                stopName={clickedStop.name} 
-                stopId={clickedStop.id} 
-                showModal={showBusInfoModal} 
+            <BusInfoModal
+                stopName={clickedStop.name}
+                stopId={clickedStop.id}
+                showModal={showBusInfoModal}
                 setShowModal={setShowBusInfoModal}
                 startYTranslation={Dimensions.get('window').height}
             />
 
-            <StopInfoModal 
+            <StopInfoModal
                 stop={clickedStop}
-                showModal={showStopInfoModal} 
+                showModal={showStopInfoModal}
                 setShowModal={setShowStopInfoModal}
                 startYTranslation={Dimensions.get('window').height}
                 toggleStopVisited={toggleStopVisited}
@@ -200,7 +205,7 @@ const Home = ({ navigation }) => {
           </>
         : null
       }
-    
+
     </View>
   )
 }
