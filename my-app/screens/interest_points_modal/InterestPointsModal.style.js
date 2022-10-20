@@ -16,10 +16,13 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
-    button:{
+    animated:{
         position:'absolute', 
         bottom: Constants.interestPointsModalRelativeHeight + Constants.interestPointsModalButtonOffset,
         alignSelf: 'center', 
+    },
+    button:{
+
         borderRadius: 12,
         backgroundColor: Colors.actBlue1,
         paddingHorizontal: 32,

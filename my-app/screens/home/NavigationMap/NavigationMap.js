@@ -172,7 +172,7 @@ const NavigationMap = ({ stops, interestPoints, showStops, onPressStop, onPressP
       </MapView>
       <Animated.View style={{ transform: [{ translateY: currentLocationPinTranslation }] }}>
         <Pressable onPress={getLocationAsync} style={{position: 'absolute', bottom:  Constants.selectedRouteModalRelativeHeight, alignSelf:'flex-end', padding: 20}}>
-            <CurrentLocation height={40} width={40} style={styles.shadow}></CurrentLocation>
+            <CurrentLocation height={40} width={40} style={Constants.shadow}></CurrentLocation>
         </Pressable>
       </Animated.View>        
     </>

@@ -14,7 +14,6 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
     const height = useRef(new Animated.Value(startMaximized ? 200 : 75)).current
 
     const minimize = () => {
-        console.log('minimize')
         Animated.timing(
             height, {
             toValue: minHeight,
@@ -25,7 +24,6 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
     }
 
     const maximize = () => {
-        console.log('maximize')
         Animated.timing(
             height, {
             toValue: maxHeight,

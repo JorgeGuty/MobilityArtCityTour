@@ -1,7 +1,6 @@
-// const got = require('got');
-// const jp = require('jsonpath');
+import jp from '../jsonpath.min.js'
 
-// const categories = ['Cerca de mí', 'Restaurantes', 'Tiendas', 'Centros Culturales', 'Museos']
+const categories = ['Cerca de mí', 'Restaurantes', 'Tiendas', 'Centros Culturales', 'Museos']
 // const pointsOfInterest =
 //     {
 //         results: [
@@ -73,88 +72,84 @@
 //         ]
 //     }
 
-// export const getCategories = () => {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             resolve(categories)
-//         }, 333)
-//     })
-// }
+export const getCategories = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(categories)
+        }, 333)
+    })
+}
 
-// export const getPointsOfInterest = (lat, lon, rad, type) => {
-//     return new Promise(async (resolve, reject) => {
-//         let loc = lat+"%2C"+lon
+export const textSearch = (json, text) => {
+    return new Promise((resolve, reject) => {
+        let searchArr = jp.query(json, "$.results[?(@.placeName =~ /"+text+".*/i )]")
+        resolve({results : searchArr})
+    })
+}
 
-//         const data = { location : loc, radius : rad, key : process.env.API_KEY, type: type, language : "es"}
-//         let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"+encodeQueryData(data);
-//         const response = await got(url).json();
+export const getPointsOfInterest = (lat, lon, rad, type) => {
+    let loc  = lat+","+lon
+    const data = { location : loc, radius : rad, key : process.env.API_KEY, type: type, language : "es"}
+    let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"+encodeQueryData(data);
+    console.log(url)
+    return fetch(url, {
+        method: 'GET'
+    })
+        .then(response => response.json())
+        .then(json => {return translateJson(json)})
+        .catch(error => console.log(error))
+}
 
-//         const finalResponse = translateJson(response);
-//         resolve(finalResponse)
-//     })
-// }
+function translateJson(json){
+    //console.log(json)
 
-// export const textSearch = (json, text) => {
-//     return new Promise((resolve, reject) => {
-//         let searchArr = jp.query(json, "$.results[?(@.placeName =~ /"+text+".*/i )]")
-//         resolve({results : searchArr})
-//     })
-// }
+    let arrayOfPlaces = []
 
+    let size = jp.query(json, "$.results")[0].length;
 
+    for (let i = 0; i < size; i++) {
 
+        let lat = jp.query(json, "$.results["+i+"].geometry.location.lat")[0];
+        let lon = jp.query(json, "$.results["+i+"].geometry.location.lng")[0];
+        let name = jp.query(json, "$.results["+i+"].name")[0];
+        let types = jp.query(json, "$.results["+i+"].types")[0];
 
-// //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRvAAAAwMpdHeWlXl-lH0vp7lez4znKPIWSWvgvZFISdKx45AwJVP1Qp37YOrH7sqHMJ8C-vBDC546decipPHchJhHZL94RcTUfPa1jWzo-rSHaTlbNtjh-N68RkcToUCuY9v2HNpo5mziqkir37WU8FJEqVBIQ4k938TI3e7bf8xq-uwDZcxoUbO_ZJzPxremiQurAYzCTwRhE_V0&key=YOUR_API_KEY
+        let imgUrl = null;
+        let photoReference = jp.query(json, "$.results["+i+"].photos[0].photo_reference");
+        if(!isArrayEmpty(photoReference)){
+            imgUrl =    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+
+                photoReference[0]+
+                "&key="+process.env.API_KEY;
+        }
 
-// function translateJson(json){
+        let isOpen = null
+        let isOpenArr = jp.query(json, "$.results["+i+"].opening_hours.open_now");
+        if(!isArrayEmpty(isOpenArr)){
+            isOpen = isOpenArr[0]
+        }
 
-//     let arrayOfPlaces = []
+        let priceLevel = null
+        let priceLevelVal = jp.query(json, "$.results["+i+"].price_level");
+        if(!isArrayEmpty(priceLevelVal)){
+            priceLevel = priceLevelVal[0]
+        }
 
-//     let size = jp.query(json, "$.results").length;
+        let appendVal = {
+            placeName: name,
+            category : types,
+            isOpen : isOpen,
+            economicCategory : priceLevel,
+            imageUrl : imgUrl,
+            location : { latitude : lat, longitude : lon }
+        }
 
-//     for (let i = 0; i < size; i++) {
+        arrayOfPlaces.push(appendVal)
+    }
+    return { results : arrayOfPlaces };
+}
 
-//         let lat = jp.query(json, "$.results["+i+"].geometry.location.lat")[0];
-//         let lon = jp.query(json, "$.results["+i+"].geometry.location.lng")[0];
-//         let name = jp.query(json, "$.results["+i+"].name")[0];
-//         let types = jp.query(json, "$.results["+i+"].types")[0];
+function encodeQueryData(data) { return new URLSearchParams(data).toString(); }
 
-//         let imgUrl = null;
-//         let photoReference = jp.query(json, "$.results["+i+"].photos[0].photo_reference");
-//         if(!isArrayEmpty(photoReference)){
-//             imgUrl =    "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+
-//                         photoReference[0]+
-//                         "&key="+process.env.API_KEY;
-//         }
-
-//         let isOpen = null
-//         let isOpenArr = jp.query(json, "$.results["+i+"].opening_hours.open_now");
-//         if(!isArrayEmpty(isOpenArr)){
-//             isOpen = isOpenArr[0]
-//         }
-
-//         let priceLevel = null
-//         let priceLevelVal = jp.query(json, "$.results["+i+"].price_level");
-//         if(!isArrayEmpty(priceLevelVal)){
-//             priceLevel = priceLevelVal[0]
-//         }
-
-//         let appendVal = {
-//             placeName: name,
-//             category : types,
-//             isOpen : isOpen,
-//             economicCategory : priceLevel,
-//             imageUrl : imgUrl,
-//             location : { latitude : lat, longitude : lon }
-//         }
-
-//         arrayOfPlaces.push(appendVal)
-//     }
-//     return { results : arrayOfPlaces };
-// }
-
-// function encodeQueryData(data) { return new URLSearchParams(data).toString(); }
-
-// function isArrayEmpty(array){
-//     return Array.isArray(array) && array.length
-// }
+function isArrayEmpty(array){
+    return !(Array.isArray(array) && array.length)
+}
