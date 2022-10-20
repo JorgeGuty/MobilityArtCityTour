@@ -12,7 +12,7 @@ const CategoryTab = ({category, selectedCategory, setSelectedCategory}) => {
             onPress={() => setSelectedCategory(category)}
         >
             <MACTText
-                style={[styles.label, categoryName === selectedCategory ? styles.selectedLabel : null]}
+                style={[styles.label, category === selectedCategory ? styles.selectedLabel : null]}
             >{category.text}</MACTText>
             {
                 category === selectedCategory &&
