@@ -49,7 +49,7 @@ const Home = ({ navigation }) => {
 
   const getPointsFromServer = async (category) => {
     //TODO: Poner coordenadas pormedio de la ruta
-    category+="";
+    category = category ? category.value : '';
     const serverPoints = await getPointsOfInterest(9.933102329459889.toString(), -84.07883146031479.toString(), (1500).toString(), category)
     setPoints([...serverPoints.results])
     setFilteredPoints([...serverPoints.results])

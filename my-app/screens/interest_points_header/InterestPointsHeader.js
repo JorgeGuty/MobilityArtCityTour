@@ -52,7 +52,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
             categories.map((category, index) =>               
                 <CategoryTab
                   key={index}
-                  categoryName={category}
+                  categoryName={category.text}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
                 />              

@@ -1,6 +1,28 @@
 import jp from '../jsonpath.min.js'
 
-const categories = ['Cerca de mí', 'Restaurantes', 'Tiendas', 'Centros Culturales', 'Museos']
+const categories = [
+    {
+        text: 'Cerca de mí',
+        value: ''
+
+    }, 
+    {
+        text: 'Restaurantes',
+        value: 'restaurant'
+    }, 
+    {
+        text: 'Tiendas',
+        value: 'store'
+    }, 
+    {
+        text: 'Centros Culturales',
+        value: 'landmark'
+    }, 
+    {
+        text: 'Museos',
+        value: 'museum'
+    }
+]
 // const pointsOfInterest =
 //     {
 //         results: [
