@@ -7,6 +7,7 @@ import { Constants } from "../../constants/constants"
 import { MACTTextBold } from "../../constants/fonts"
 import MyModal from "../../styleguide/modal/MyModal"
 import PlaceCard from "../../styleguide/cards/place_card/PlaceCard"
+import IconButton from "../../styleguide/buttons/icon_button/IconButton"
 
 
 const InterestPointsModal = ({show, points}) => {
@@ -88,24 +89,20 @@ const InterestPointsModal = ({show, points}) => {
           body={renderPlaceList()}
         >
         </MyModal>
-        <Animated.View style={[{ transform: [{ translateY: buttonVerticalTranslation }] }]}>
-          <Pressable 
-            style = {[Constants.shadow, styles.button]}
-            onPress = {() => setShowFull(!showFull)}
-          >
-            {
+        <Animated.View style={[styles.animated, { transform: [{ translateY: buttonVerticalTranslation }] }]}>
+          <IconButton
+            icon = {
               showFull 
               ? <MapIcon></MapIcon>
               : <ListIcon></ListIcon>
-            }         
-            <MACTTextBold style={styles.buttonLabel}>            
-              {
-                showFull 
-                ? Constants.verMapa
-                : Constants.verLista
-              }   
-            </MACTTextBold>
-          </Pressable>    
+            }    
+            label = {
+              showFull 
+              ? Constants.verMapa
+              : Constants.verLista
+            }     
+            onPress = {() => setShowFull(!showFull)}
+          />          
         </Animated.View>
       </>
     )

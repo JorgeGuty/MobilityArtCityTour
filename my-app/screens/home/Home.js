@@ -18,6 +18,9 @@ import SearchPointsHeader from '../search_points_header/SearchPointsHeader'
 
 const Home = ({ navigation }) => {
 
+  let referenceRouteCoord
+  let referencePointsCoord
+
   const [selectedRoute, setSelectedRoute] = useState({})
   const [showStops, setShowStops] = useState(true)
   const [showBusInfoModal, setShowBusInfoModal] = useState(false)
@@ -111,6 +114,10 @@ const Home = ({ navigation }) => {
     return index
   }
 
+  const navigateToMenu = () => {
+    navigation.navigate('Menu')
+  }
+
   return (
     <View style={{height: Dimensions.get('screen').height, width: Dimensions.get('screen').width}}>
       {
@@ -139,6 +146,7 @@ const Home = ({ navigation }) => {
               setToggler={setModeToggler}
               filterPoints={filterPoints}
               setShowSearchHeader={setShowSearchHeader}
+              goToMenu={navigateToMenu}
             ></HomeHeader>
           
             <SearchPointsHeader

@@ -9,7 +9,7 @@ import BotonBuscar from '../../../assets/icons/boton_buscar.svg'
 import BotonMenu from '../../../assets/icons/boton_menu.svg'
 import { Constants } from "../../../constants/constants";
 
-const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader}) => {
+const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader, goToMenu}) => {
 
     const [active, setActive] = useState(true)
 
@@ -53,6 +53,7 @@ const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader}) =>
         >
             <Pressable
                 style={styles.headerElement}
+                onPress={goToMenu}
             >
                 <BotonMenu></BotonMenu>
             </Pressable>

@@ -19,6 +19,7 @@ import SignUp from './screens/sign_up/SignUp';
 import HomeHeader from './screens/home/header/HomeHeader';
 import HomeHeaderExample from './examples/screens/HomeHeader.eg';
 import PlaceCardExample from './examples/screens/PlaceCard.eg';
+import Menu from './screens/menu/Menu';
 
 const Stack = createNativeStackNavigator()
 
@@ -26,13 +27,14 @@ export default function App() {
   return (
     <NavigationContainer>
       	<Stack.Navigator initialRouteName='Login' screenOptions={{headerShown: false}}>
-          <Stack.Screen name='Home' component={Home} options={{ animation: 'fade' }} />
+          <Stack.Screen name='Home' component={Home} options={{ animation: 'fade',  }} />
           <Stack.Screen name='Login' component={Login} options={{ animation: 'fade' }} />
           <Stack.Screen name='ChangePassword' component={ChangePassword} options={{ animation: 'fade' }} />
           <Stack.Screen name='SendCode' component={SendCode} options={{ animation: 'fade' }} />
           <Stack.Screen name='EnterCode' component={EnterCode} options={{ animation: 'fade' }} />
           <Stack.Screen name='ResetPassword' component={ResetPassword} options={{ animation: 'fade' }} />
           <Stack.Screen name='SignUp' component={SignUp} options={{ animation: 'fade' }} />
+          <Stack.Screen name='Menu' component={Menu} options={{ animation: 'fade', presentation: 'transparentModal' }} />
         </Stack.Navigator>
     </NavigationContainer>
     // <SafeAreaView style={{ width: Dimensions.get('screen').width, height: Dimensions.get('screen').height }}>
