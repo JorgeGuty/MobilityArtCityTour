@@ -5,17 +5,16 @@ import TabBar from '../../../assets/icons/barra_tab.svg'
 
 
 const CategoryTab = ({category, selectedCategory, setSelectedCategory}) => {
-
     return (
         <Pressable 
             style={styles.container}
             onPress={() => setSelectedCategory(category)}
         >
             <MACTText
-                style={[styles.label, category === selectedCategory ? styles.selectedLabel : null]}
+                style={[styles.label, category.value === selectedCategory.value ? styles.selectedLabel : null]}
             >{category.text}</MACTText>
             {
-                category === selectedCategory &&
+                category.value === selectedCategory.value &&
                 <TabBar
                     style={styles.bar}
                 />

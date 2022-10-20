@@ -96,9 +96,7 @@ const categories = [
 
 export const getCategories = () => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(categories)
-        }, 333)
+        resolve(categories)
     })
 }
 
@@ -113,7 +111,7 @@ export const getPointsOfInterest = (lat, lon, rad, type) => {
     let loc  = lat+","+lon
     const data = { location : loc, radius : rad, key : process.env.API_KEY, type: type, language : "es"}
     let url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"+encodeQueryData(data);
-    console.log(url)
+    // console.log(url)
     return fetch(url, {
         method: 'GET'
     })

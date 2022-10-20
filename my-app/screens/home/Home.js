@@ -30,7 +30,29 @@ const Home = ({ navigation }) => {
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
 
-  const [categories, setCategories] = useState([])
+  const categories = [
+    {
+        text: 'Cerca de mí',
+        value: ''
+
+    }, 
+    {
+        text: 'Restaurantes',
+        value: 'restaurant'
+    }, 
+    {
+        text: 'Tiendas',
+        value: 'store'
+    }, 
+    {
+        text: 'Centros Culturales',
+        value: 'tourist_attraction'
+    }, 
+    {
+        text: 'Museos',
+        value: 'museum'
+    }
+  ]
   const [selectedCategory, setSelectedCategory] = useState("")
 
   const [points, setPoints] = useState([])
@@ -41,11 +63,6 @@ const Home = ({ navigation }) => {
     setSelectedRoute(data[0])
   }
 
-  const getCategoriesFromServer = async () => {
-    const serverCategories = await getCategories()
-    setCategories(serverCategories)
-    setSelectedCategory(serverCategories[0])
-  }
 
   const getPointsFromServer = async (category) => {
     //TODO: Poner coordenadas pormedio de la ruta
@@ -74,7 +91,7 @@ const Home = ({ navigation }) => {
 
   useEffect(()=>{
     getActiveRoutesFromServer()
-    getCategoriesFromServer()
+    setSelectedCategory(categories[0])
     getPointsFromServer()
   }, [])
 
