@@ -5,7 +5,7 @@ import { MACTTextBold } from "../../../constants/fonts"
 
 const IconButton = ({icon, label, onPress}) => {
     return (
-        <Pressable 
+      <Pressable 
         style = {[Constants.shadow, styles.button]}
         onPress = {onPress}
         >

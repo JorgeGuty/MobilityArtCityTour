@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import { Colors } from '../../constants/colors'
-import { Constants } from '../../constants/constants'
+import { Constants,  } from '../../constants/constants'
 
 export const styles = StyleSheet.create({
     background: {
@@ -10,10 +10,13 @@ export const styles = StyleSheet.create({
           
     },
     options: {
-        paddingHorizontal: 50
+        paddingHorizontal: 50,
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-start',
     },
     option:{
-        marginBottom: 20
+        marginBottom: 20,
     },
     menuHeader: {
         height: Constants.homeHeaderHeight,
@@ -22,4 +25,9 @@ export const styles = StyleSheet.create({
         padding: 10,
 
     },
+    menuSlider: {
+        width: Dimensions.get('screen').width * 2,
+        height: Dimensions.get('screen').height,
+        flexDirection: 'row',
+    }
 })

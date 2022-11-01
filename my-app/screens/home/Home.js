@@ -16,10 +16,16 @@ import { getCategories, getPointsOfInterest, textSearch } from '../../servercall
 import SearchPointsHeader from '../search_points_header/SearchPointsHeader'
 
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
 
   let referenceRouteCoord
   let referencePointsCoord
+
+  let selectedRouteIndex = route.params.selectedRouteIndex ? route.params.selectedRouteIndex : 0
+  let paramsFontAmplifier = route.params.fontAmplifier ? route.params.fontAmplifier : 0
+
+  const [serverRoutes, setServerRoutes] = useState([])
+  const [fontAmplifier, setFontAmplifier] = useState(0)
 
   const [selectedRoute, setSelectedRoute] = useState({})
   const [showStops, setShowStops] = useState(true)
@@ -60,9 +66,9 @@ const Home = ({ navigation }) => {
 
   const getActiveRoutesFromServer = async () => {
     const data = await getActiveRoutes()
+    setServerRoutes(data)
     setSelectedRoute(data[0])
   }
-
 
   const getPointsFromServer = async (category) => {
     //TODO: Poner coordenadas pormedio de la ruta
@@ -96,8 +102,12 @@ const Home = ({ navigation }) => {
   }, [])
 
   useEffect(()=>{
-    console.log("Changed selected route")
-  }, [selectedRoute])
+    selectedRouteIndex !== 0 ? setSelectedRoute(serverRoutes[selectedRouteIndex]) : null
+  },[selectedRouteIndex])
+
+  useEffect(()=> {
+    setFontAmplifier(paramsFontAmplifier)
+  },[paramsFontAmplifier])
 
   useEffect(()=>{
     getPointsFromServer(selectedCategory)
@@ -141,7 +151,7 @@ const Home = ({ navigation }) => {
   }
 
   const navigateToMenu = () => {
-    navigation.navigate('Menu')
+    navigation.navigate('Menu', {routes: serverRoutes})
   }
 
   return (
@@ -194,7 +204,6 @@ const Home = ({ navigation }) => {
               onPressStopInfo={onPressStopInfo}
               show={modeToggler}
             />
-
 
             <BusInfoModal
                 stopName={clickedStop.name}

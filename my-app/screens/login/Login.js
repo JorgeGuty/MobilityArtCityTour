@@ -23,7 +23,7 @@ const Login = ({ navigation }) => {
                     );
                     console.log(response);
                 }
-                else navigation.navigate('Home')
+                else navigation.navigate('Home', {})
                 
             }
         ).catch((error) =>
