@@ -66,5 +66,14 @@ export const styles = StyleSheet.create({
     },
     fontAmplifierExample: {
         height: 30,
+    },
+    contactInfoLine: {
+        marginTop: 5,
+        flexDirection:'row',
+        alignItems: 'center',
+        marginBottom: 15
+    },
+    contactInfoText: {
+        marginBottom: 20
     }
 })

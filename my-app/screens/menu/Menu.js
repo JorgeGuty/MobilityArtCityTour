@@ -6,6 +6,9 @@ import RouteChangeIcon from '../../assets/icons/cambio_ruta_icon.svg'
 import HelpIcon from '../../assets/icons/ayuda_icon.svg'
 import AccessibilityIcon from '../../assets/icons/accesibilidad_icon.svg'
 import GoBackIcon from '../../assets/icons/flecha_atras_blanca.svg'
+import FacebookIcon from '../../assets/icons/facebookIcon.svg'
+import InstagramIcon from '../../assets/icons/instagramIcon.svg'
+import MailIcon from '../../assets/icons/mailIcon.svg'
 import { Constants,  } from "../../constants/constants"
 import IconButton from "../../styleguide/buttons/icon_button/IconButton"
 import { useEffect, useRef, useState } from "react"
@@ -202,6 +205,11 @@ const Menu  = ({ navigation, route }) => {
                     menuSelection === 2 ?
                     <View style={styles.contentCard}>
                         <MACTTextBold
+                            style={[{fontSize:  30, color: Colors.actOrange1}]}
+                        >
+                            Accesibilidad
+                        </MACTTextBold>
+                        <MACTTextBold
                             style={[{fontSize:  20, color: Colors.actBlue1}]}
                         >
                             Tamaño del texto
@@ -242,7 +250,51 @@ const Menu  = ({ navigation, route }) => {
                     :
                     menuSelection === 3 ?
                     <View style={styles.contentCard}>
+                        <MACTTextBold
+                            style={[{fontSize:  30, color: Colors.actOrange1}]}
+                        >
+                            Ayuda
+                        </MACTTextBold>
+                        <MACTTextBold
+                            style={[{fontSize:  20, color: Colors.actBlue1}]}
+                        >
+                            Redes Sociales
+                        </MACTTextBold>
+                        <MACTText
+                            style={styles.contactInfoText}
+                        >
+                            Puedes contactarnos por medio de nuestras redes sociales:
+                        </MACTText>
 
+                        <InstagramIcon height={30} width={30}></InstagramIcon>
+                        <MACTText
+                            style={styles.contactInfoText}
+                        >
+                            @artcitytour
+                        </MACTText>
+
+                        <FacebookIcon height={30} width={30}></FacebookIcon>
+                        <MACTText
+                            style={styles.contactInfoText}
+                        >
+                            @ArtCityTour
+                        </MACTText>
+                        <MACTTextBold
+                            style={[{fontSize:  20, color: Colors.actBlue1}]}
+                        >
+                            Soporte
+                        </MACTTextBold>
+                        <MACTText
+                            style={styles.contactInfoText}
+                        >
+                            O para consultas sobre la aplicación con nuestro equipo de soporte:
+                        </MACTText>
+
+                        <MailIcon></MailIcon>
+                        <MACTText
+                            style={styles.contactInfoText}
+                        >
+                            movilidadact.soporte@gmail.com</MACTText>
                     </View>
                     :
                     null
