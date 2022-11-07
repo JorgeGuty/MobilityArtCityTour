@@ -9,7 +9,7 @@ import BotonBuscar from '../../../assets/icons/boton_buscar.svg'
 import BotonMenu from '../../../assets/icons/boton_menu.svg'
 import { Constants } from "../../../constants/constants";
 
-const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader, goToMenu}) => {
+const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader, goToMenu, accessibilitySettings}) => {
 
     const [active, setActive] = useState(true)
 
@@ -63,6 +63,7 @@ const HomeHeader = ({toggler, setToggler, filterPoints, setShowSearchHeader, goT
                 <TabToggle
                     toggler={toggler}
                     setToggler={setToggler}
+                    accessibilitySettings={accessibilitySettings}
                 ></TabToggle>
             </View>
             <Animated.View

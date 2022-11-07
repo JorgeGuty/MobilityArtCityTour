@@ -10,22 +10,37 @@ import { Constants,  } from "../../constants/constants"
 import IconButton from "../../styleguide/buttons/icon_button/IconButton"
 import { useEffect, useRef, useState } from "react"
 import { fontContext } from '../../contexts/fontContext'
+import { MACTText, MACTTextBold } from "../../constants/fonts"
+import { Colors } from "../../constants/colors"
 
 
 const Menu  = ({ navigation, route }) => {
 
     let routes = route.params.routes
-    
+
     const [menuSelection, setMenuSelection] = useState(0)
 
     const menuOptionsHorizontalTranslation = useRef(new Animated.Value(0)).current
 
     const [menuDepth, setMenuDepth] = useState(0)
 
-    const [fontAmplifier, setFontAmplifier] = useState(0)
+    let paramsAccessibilitySettings = route.params.accessibilitySettings ? route.params.accessibilitySettings : null
+
+    const [accessibilitySettings, setAccessibilitySettings] = useState({
+        fontAmplifier: 0
+    })
+
+    useEffect(()=> {
+        if (paramsAccessibilitySettings !== null) {
+          let modifiedAccessibility = {
+            ...paramsAccessibilitySettings
+          };    
+          setAccessibilitySettings(modifiedAccessibility)
+        }
+      },[paramsAccessibilitySettings])
 
     const goBackActionsStack = [
-        () => navigation.navigate('Home', {fontAmplifier: fontAmplifier}),
+        () => navigation.navigate('Home', {accessibilitySettings: accessibilitySettings}),
         () => bringMenuOptions()
     ]
 
@@ -51,8 +66,32 @@ const Menu  = ({ navigation, route }) => {
         ]).start()
       }
 
+    const onPressHelp = () => {
+        setMenuSelection(3)
+        setMenuDepth(menuDepth + 1)
+        bringSelectedOptionOptions()
+    }
+
     const onPressAccessibility = () => {
-        setFontAmplifier(fontAmplifier + 1)
+        setMenuSelection(2)
+        setMenuDepth(menuDepth + 1)
+        bringSelectedOptionOptions()
+    }
+
+    const incrementFontSize = () => {
+        let modifiedAccessibility = {
+            ...accessibilitySettings
+        }
+        modifiedAccessibility.fontAmplifier = modifiedAccessibility.fontAmplifier < 4 ? modifiedAccessibility.fontAmplifier + 2 : modifiedAccessibility.fontAmplifier
+        setAccessibilitySettings(modifiedAccessibility)    
+    }
+
+    const decrementFontSize = () => {
+        let modifiedAccessibility = {
+            ...accessibilitySettings
+        }
+        modifiedAccessibility.fontAmplifier = modifiedAccessibility.fontAmplifier > -4 ? modifiedAccessibility.fontAmplifier - 2 : modifiedAccessibility.fontAmplifier
+        setAccessibilitySettings(modifiedAccessibility)
     }
 
     const onPressRouteChange = () => {
@@ -69,13 +108,13 @@ const Menu  = ({ navigation, route }) => {
         setMenuDepth(menuDepth - 1)  
         goBackActionsStack[menuDepth]()
     }
-    
+
     const menuOptions = [
-        // {
-        //     icon: <HelpIcon/>,
-        //     label: 'Ayuda',
-        //     onPress: onPressHelp
-        // },
+        {
+            icon: <HelpIcon/>,
+            label: 'Ayuda',
+            onPress: onPressHelp
+        },
         {
             icon: <AccessibilityIcon/>,
             label: 'Accesibilidad',
@@ -106,7 +145,7 @@ const Menu  = ({ navigation, route }) => {
                         : 
                         <GoBackIcon
                             style={Constants.shadow}
-                            ></GoBackIcon>
+                        ></GoBackIcon>
                     }
                 </Pressable>
             </View>
@@ -132,6 +171,7 @@ const Menu  = ({ navigation, route }) => {
                                         icon = {option.icon}
                                         label = {option.label}
                                         onPress = {option.onPress}
+                                        accessibilitySettings={accessibilitySettings}
                                     />
                                 </View>
                             )
@@ -151,11 +191,58 @@ const Menu  = ({ navigation, route }) => {
                                         <IconButton                                
                                             label = {route.name}
                                             onPress = {() => returnHomeWithRouteChange(index)}
-                                            />
+                                            accessibilitySettings={accessibilitySettings}
+                                        />
                                     </View>
                                 )
                             })
                         }                        
+                    </View>
+                    :
+                    menuSelection === 2 ?
+                    <View style={styles.contentCard}>
+                        <MACTTextBold
+                            style={[{fontSize:  20, color: Colors.actBlue1}]}
+                        >
+                            Tamaño del texto
+                        </MACTTextBold>
+                        <MACTText
+                            style={[styles.fontAmplifierExample, {fontSize: (20 + accessibilitySettings.fontAmplifier)}]}
+                        >
+                            Texto
+                        </MACTText>
+                        <View
+                            style={[styles.fontAmplifierInput, Constants.shadow]}
+                        >
+                            <Pressable
+                                style={styles.decrementFontSizeInput}
+                                onPress={decrementFontSize}
+                                >
+                                <MACTTextBold                                    
+                                    style={{fontSize:  40}}                                        
+                                >
+                                    -
+                                </MACTTextBold>
+                            </Pressable>
+                            <Pressable
+                                style={styles.incrementFontSizeInput}
+                                onPress={incrementFontSize}
+                            >
+                                <MACTTextBold
+                                    style={{fontSize:  40}}
+                                >
+                                    +
+                                </MACTTextBold>                                
+                            </Pressable>
+                        </View>
+                        {
+                            accessibilitySettings.fontAmplifier === 0 && <MACTText>Por defecto</MACTText>
+                        }
+                    </View>
+                    :
+                    menuSelection === 3 ?
+                    <View style={styles.contentCard}>
+
                     </View>
                     :
                     null

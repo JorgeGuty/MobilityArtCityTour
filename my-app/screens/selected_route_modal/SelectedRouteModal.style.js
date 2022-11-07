@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
         borderTopRightRadius: 30,
     },
     title: { 
-        fontSize: 20, 
-        color: Colors.actGray1, 
+ 
+        color: Colors.actBlue1, 
         marginLeft:20, 
         marginBottom: 5, 
         marginTop: 10

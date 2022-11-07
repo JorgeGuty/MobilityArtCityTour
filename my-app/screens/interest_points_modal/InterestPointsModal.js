@@ -10,7 +10,7 @@ import PlaceCard from "../../styleguide/cards/place_card/PlaceCard"
 import IconButton from "../../styleguide/buttons/icon_button/IconButton"
 
 
-const InterestPointsModal = ({show, points}) => {
+const InterestPointsModal = ({show, points, accessibilitySettings}) => {
 
     const [showFull, setShowFull] = useState(false)
 
@@ -72,6 +72,7 @@ const InterestPointsModal = ({show, points}) => {
                     startMaximized={showFull}
                     sizeToggler={!showFull}
                     place={point}
+                    accessibilitySettings={accessibilitySettings}
                   />
                 )
               })
@@ -103,6 +104,7 @@ const InterestPointsModal = ({show, points}) => {
               : Constants.verLista
             }     
             onPress = {() => setShowFull(!showFull)}
+            accessibilitySettings={accessibilitySettings}
           />          
         </Animated.View>
       </>

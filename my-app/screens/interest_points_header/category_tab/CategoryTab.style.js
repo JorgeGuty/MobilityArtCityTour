@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     label: {
-        fontSize: 14,
+
         color: Colors.actGray3
     },
     selectedLabel: {

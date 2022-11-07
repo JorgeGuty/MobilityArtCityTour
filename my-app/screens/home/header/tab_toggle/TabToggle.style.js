@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         justifyContent:'center',
     },
     tabOptionLabel: { 
-        fontSize: 20, 
+
         flexShrink: 1,
         color: Colors.actBlue1,
     },

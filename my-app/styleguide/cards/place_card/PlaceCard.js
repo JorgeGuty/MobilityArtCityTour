@@ -4,7 +4,7 @@ import { Colors } from "../../../constants/colors"
 import { MACTTextBold, MACTText } from "../../../constants/fonts"
 import { styles } from "./PlaceCard.style"
 import { Constants } from "../../../constants/constants"
-const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
+const PlaceCard = ({ startMaximized, sizeToggler, place, accessibilitySettings }) => {
 
     const minHeight = 75
     const maxHeight = 250
@@ -91,8 +91,8 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
                 <View
                     style={styles.title}
                 >
-                    <MACTTextBold style={{ fontSize: 20, color: Colors.actBlue2, flexShrink: 1}}>{place.placeName}</MACTTextBold>
-                    <MACTText>{formatCategory(place.category[0])}</MACTText>
+                    <MACTTextBold style={{ fontSize: accessibilitySettings.fontAmplifier +  20 , color: Colors.actBlue2, flexShrink: 1}}>{place.placeName}</MACTTextBold>
+                    <MACTText style={{ fontSize: accessibilitySettings.fontAmplifier +  15 , }}>{formatCategory(place.category[0])}</MACTText>
                 </View>
                 <Animated.View
                     style={[
@@ -105,8 +105,8 @@ const PlaceCard = ({ startMaximized, sizeToggler, place }) => {
                         }
                     ]}                
                 >
-                    <MACTText style={styles.openState}>{place.isOpen ? 'Abierto' : 'Cerrado'}</MACTText>
-                    <MACTText>{formatEconomicCategory(place.economicCategory)}</MACTText>
+                    <MACTText style={[styles.openState, { fontSize: accessibilitySettings.fontAmplifier +  15 , }]}>{place.isOpen ? 'Abierto' : 'Cerrado'}</MACTText>
+                    <MACTText style={{ fontSize: accessibilitySettings.fontAmplifier +  15 , }}>{formatEconomicCategory(place.economicCategory)}</MACTText>
                 </Animated.View>
             </Animated.View>
         </Animated.View>

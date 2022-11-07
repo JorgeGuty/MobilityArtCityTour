@@ -12,7 +12,7 @@ import * as Location from 'expo-location';
 import { Constants } from '../../../constants/constants';
 import SimpleMarker from '../../../styleguide/markers/SimpleMarker/SimpleMarker';
 
-const NavigationMap = ({ stops, interestPoints, showStops, onPressStop, onPressPoint }) => {
+const NavigationMap = ({ stops, interestPoints, showStops, onPressStop, onPressPoint, accessibilitySettings }) => {
 
   const initialRegion = {
     latitude: stops[0].latitude,

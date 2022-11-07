@@ -3,7 +3,7 @@ import { Colors } from '../../constants/colors.js'
 
 export const styles = StyleSheet.create({
   headerTitle: {
-    fontSize: 30, 
+    
     //borderWidth:1, 
     color: Colors.actBlue2, 
     flex: 2,
@@ -24,21 +24,20 @@ export const styles = StyleSheet.create({
   },
   scheduleTimeCard:{
     flex : 1, 
-    maxWidth: '80%',
+    // maxWidth: '80%',
     borderRadius: 18, 
     marginRight: 20, 
     marginVertical: 5, 
     flexDirection: 'row', 
     paddingHorizontal: 30, 
-    paddingVertical: 20,
+    alignItems: 'center',
     backgroundColor: Colors.actGray4
   },
   scheduleTimeLabel: {
-    fontSize: 20, 
 
   },
   completeScheduleLabel: {
-    fontSize: 20, 
+
   },
   isNextArrangement: {
 
@@ -51,7 +50,7 @@ export const styles = StyleSheet.create({
     flex:1
   },
   nextBusLabel: {
-    fontSize: 25, 
+
     //borderWidth:1, 
     color: Colors.actBlue2, 
     flex: 1,
@@ -69,7 +68,6 @@ export const styles = StyleSheet.create({
     alignItems:'center', 
   },
   nextBusTime:{
-    fontSize: 25, 
     //borderWidth:1, 
     color: 'black', 
     flex: 1,

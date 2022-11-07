@@ -7,7 +7,7 @@ import VisitedLabel from './VisitedLabel/VisitedLabel'
 import BussesInfoButton from './BusesInfoButton/BussesInfoButton'
 import IndexedMarker from '../../../styleguide/markers/IndexedMarker/IndexedMarker'
 
-const StopCard = ({ stop, stopType, index, visited, onPressBusInfo, onPressStopInfo }) => {
+const StopCard = ({ stop, stopType, index, visited, onPressBusInfo, onPressStopInfo, accessibilitySettings }) => {
   return (
     <Pressable 
       style={[styles.mainContainer, !!visited ? styles.visitedArrangement : [styles.notVisitedArrangement, styles.shadow]]} 
@@ -17,8 +17,8 @@ const StopCard = ({ stop, stopType, index, visited, onPressBusInfo, onPressStopI
     >
         <View style={{flex : 3, flexWrap: 'wrap', flexShrink: 1}}>
             <View style={{flex : 3}}>
-                <MACTTextBold style={{ fontSize: 20, color: Colors.actBlue2, flexShrink: 1}}>{stop.name}</MACTTextBold>
-                <MACTText>{stopType}</MACTText>
+                <MACTTextBold style={{ fontSize: accessibilitySettings.fontAmplifier +  20 , color: Colors.actBlue2, flexShrink: 1}}>{stop.name}</MACTTextBold>
+                <MACTText style={{ fontSize: accessibilitySettings.fontAmplifier +  16 , }}>{stopType}</MACTText>
             </View>
             <VisitedLabel style={{flex : 1}} isVisited={visited}></VisitedLabel>
         </View>

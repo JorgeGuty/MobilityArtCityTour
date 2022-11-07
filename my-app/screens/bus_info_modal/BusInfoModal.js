@@ -9,7 +9,7 @@ import MyModal from '../../styleguide/modal/MyModal'
 // Simulation files
 import getSchedule from '../../simulations/GetSchedule.sim'
 
-const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTranslation }) => {
+const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTranslation,  accessibilitySettings}) => {
 
   const getScheduleFromServer = async () => {
     const data = await getSchedule(stopId)
@@ -26,7 +26,7 @@ const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTransla
 
     return (
       <View style={styles.headerContainer}>
-          <MACTTextBold style={styles.headerTitle}>
+          <MACTTextBold style={[styles.headerTitle, { fontSize: accessibilitySettings.fontAmplifier +  30 , }]}>
               {stopName}
           </MACTTextBold>
       </View>
@@ -37,14 +37,14 @@ const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTransla
     return (
       <View style={styles.bodyContainer}>
         <View style={styles.nextBusInfoContainer}>
-          <MACTTextBold style={styles.nextBusLabel}>
+          <MACTTextBold style={[styles.nextBusLabel, { fontSize: accessibilitySettings.fontAmplifier +  25 , }]}>
               Próximo bus:
           </MACTTextBold>
-          <MACTTextBold style = {styles.nextBusTime}>
+          <MACTTextBold style = {[styles.nextBusTime, { fontSize: accessibilitySettings.fontAmplifier +  25 , }]}>
             {schedule[0]}
           </MACTTextBold>
         </View>
-        <MACTText style={styles.completeScheduleLabel}>Siguientes buses:</MACTText>
+        <MACTText style={[styles.completeScheduleLabel, { fontSize: accessibilitySettings.fontAmplifier +  20 , }]}>Siguientes buses:</MACTText>
         <ScrollView
           horizontal
           style={{flex:1}}
@@ -56,7 +56,7 @@ const BusInfoModal = ({ stopName, stopId, showModal, setShowModal, startYTransla
                   key={index}
                   style={styles.scheduleTimeCard}
                 >
-                  <MACTText style={styles.scheduleTimeLabel}>{time}</MACTText>
+                  <MACTText style={[styles.scheduleTimeLabel, { fontSize: accessibilitySettings.fontAmplifier +  20 , }]}>{time}</MACTText>
                 </View>
               : null
             ))

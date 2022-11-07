@@ -6,7 +6,7 @@ import Filters from "../../assets/icons/boton_filtros.svg"
 import CategoryTab from "./category_tab/CategoryTab"
 import FilterButton from "../../styleguide/buttons/filter_button/FilterButton"
 
-const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories, setShowFiltersModal}) => {
+const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, categories, setShowFiltersModal, accessibilitySettings}) => {
 
     const headerVerticalTranslation = useRef(new Animated.Value(0)).current
 
@@ -43,7 +43,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
 
     return (
       <Animated.View style={[styles.header, { transform: [{ translateY: headerVerticalTranslation }] }]}>
-        <FilterButton setShowFiltersModal={setShowFiltersModal}/>
+        <FilterButton setShowFiltersModal={setShowFiltersModal} accessibilitySettings={accessibilitySettings}/>
         <ScrollView 
           style={styles.categories}
           horizontal
@@ -55,6 +55,7 @@ const InterestPointsHeader = ({show, selectedCategory, setSelectedCategory, cate
                   category={category}
                   selectedCategory={selectedCategory}
                   setSelectedCategory={setSelectedCategory}
+                  accessibilitySettings={accessibilitySettings}
                 />              
             )
         }

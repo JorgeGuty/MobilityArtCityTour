@@ -5,7 +5,7 @@ import { MACTTextBold } from '../../constants/fonts'
 import StopCard from './StopCard/StopCard'
 import { styles } from './SelectedRouteModal.style'
 import { Constants } from '../../constants/constants'
-const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) => { 
+const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show, accessibilitySettings }) => { 
   
   const modalVerticalTranslation = useRef(new Animated.Value(0)).current
 
@@ -43,7 +43,7 @@ const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) =>
 
   return (
     <Animated.View style={[styles.mainContainer, { transform: [{ translateY: modalVerticalTranslation }] }]}>
-      <MACTTextBold style={styles.title}>{route.name}</MACTTextBold>
+      <MACTTextBold style={[styles.title, { fontSize:  20 + accessibilitySettings.fontAmplifier } ]}>{route.name}</MACTTextBold>
       <ScrollView
         horizontal={true}
         directionalLockEnabled
@@ -59,6 +59,7 @@ const SelectedRouteModal = ({ route, onPressBusInfo, onPressStopInfo, show }) =>
             stopType={stop.type}
             visited={stop.visited}
             index={index} 
+            accessibilitySettings={accessibilitySettings}
           />
         )}
       </ScrollView>

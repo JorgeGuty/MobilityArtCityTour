@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         alignItems:'center'
     },
     buttonLabel: {
-        fontSize: 16,
+
         color: 'white',
         marginLeft: 10
     },

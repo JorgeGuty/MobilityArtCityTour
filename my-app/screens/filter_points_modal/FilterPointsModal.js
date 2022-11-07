@@ -7,7 +7,7 @@ import { MACTText, MACTTextBold } from "../../constants/fonts";
 import { useEffect, useState } from "react";
 import { Colors } from "../../constants/colors";
 
-const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterItems}) => {
+const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterItems, accessibilitySettings}) => {
 
     const [filterSelected, setFilterSelected] = useState(false)
     const [filterIsOpen, setFilterIsOpen] = useState(false)
@@ -52,7 +52,7 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
             <View
                 style={styles.header}
             >
-                <MACTTextBold style={styles.title}>Filtros</MACTTextBold>
+                <MACTTextBold style={[styles.title, { fontSize: accessibilitySettings.fontAmplifier + 30 , }]}>Filtros</MACTTextBold>
             </View>
         )
     }
@@ -73,7 +73,7 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
                                 key={index}
                             >
                                 <MACTText
-                                    style={styles.filterName}
+                                    style={[styles.filterName, { fontSize: accessibilitySettings.fontAmplifier + 17 , }]}
                                 >{filter.filterName}</MACTText>
                                 <Switch       
                                     trackColor={{ false: Colors.actGray4, true: Colors.actOrange2 }}
@@ -94,7 +94,7 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
                         onPress={clearFilters}
                     >
                         <MACTText
-                            style={styles.buttonText}
+                            style={[styles.buttonText, { fontSize: accessibilitySettings.fontAmplifier + 18 , }]}
                         >
                             Limpiar
                         </MACTText>
@@ -106,12 +106,12 @@ const FilterPointsModal = ({setShowModal, showModal, startYTranslation, filterIt
                         {
                             filterSelected 
                             ?   <MACTTextBold
-                                    style={styles.showResultsText}
+                                    style={[styles.showResultsText, { fontSize: accessibilitySettings.fontAmplifier + 18 , }]}
                                 >
                                     Mostrar resultados
                                 </MACTTextBold> 
                             :   <MACTText
-                                    style={styles.buttonText}
+                                    style={[styles.buttonText, { fontSize: accessibilitySettings.fontAmplifier + 18 , }]}
                                 >
                                     Mostrar resultados
                                 </MACTText>

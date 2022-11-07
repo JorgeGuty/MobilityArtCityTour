@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     paddingTop: 10, 
   },
   headerTitle: {
-    fontSize: 30, 
     //borderWidth:1, 
     color: Colors.actBlue2, 
     flex: 2,
@@ -53,7 +52,7 @@ export const styles = StyleSheet.create({
   },
 
   markVisitedButtonLabel: {
-    fontSize: 20,
+
     color: 'white', 
   },
   descriptionContainer:{
@@ -63,6 +62,5 @@ export const styles = StyleSheet.create({
     marginBottom: 10
   },
   descriptionText:{
-    fontSize: 18
   }
 })

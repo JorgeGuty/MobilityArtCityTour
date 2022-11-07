@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     title: { 
-        fontSize: 30, 
         color: Colors.actBlue2, 
         marginLeft:20, 
         marginBottom: 5, 
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
     },
     filterName:{
         marginLeft: 22,
-        fontSize: 17,
+
         color: Colors.actGray2
     },
     submitButtons: {
@@ -53,14 +52,13 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 15
     },
     buttonText:{
-        fontSize: 18,
-        color: Colors.actGray2
+        color: Colors.actGray2,
+        maxWidth: 170
     },
     showResultsButton:{
         backgroundColor: Colors.actBlue1
     },
     showResultsText:{
-        fontSize: 18,
         color:'white'
     },
 

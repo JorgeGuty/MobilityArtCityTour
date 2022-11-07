@@ -6,13 +6,13 @@ import { Colors } from '../../constants/colors'
 import CancelX from '../../assets/icons/cancel_x_azul.svg'
 import MyModal from '../../styleguide/modal/MyModal'
 
-const StopInfoModal = ({ stop, showModal, setShowModal, startYTranslation, toggleStopVisited }) => {
+const StopInfoModal = ({ stop, showModal, setShowModal, startYTranslation, toggleStopVisited, accessibilitySettings }) => {
 
   const renderHeader = () => {
 
     return (
       <View style={styles.headerContainer}>
-          <MACTTextBold style={styles.headerTitle}>
+          <MACTTextBold style={[styles.headerTitle, { fontSize: accessibilitySettings.fontAmplifier +  30 , }]}>
               {stop.name}
           </MACTTextBold>
       </View>
@@ -27,7 +27,7 @@ const StopInfoModal = ({ stop, showModal, setShowModal, startYTranslation, toggl
             contentInset={{ top: 0, left: 0, bottom: 200, right: 0 }}
             style={styles.descriptionContainer}
         >
-            <MACTText style={styles.descriptionText}>
+            <MACTText style={[styles.descriptionText, { fontSize: accessibilitySettings.fontAmplifier +  18 , }]}>
                 {stop.description}
             </MACTText>
         </ScrollView>
@@ -41,7 +41,7 @@ const StopInfoModal = ({ stop, showModal, setShowModal, startYTranslation, toggl
                 }
             }
         >
-            <MACTTextBold style={styles.markVisitedButtonLabel} >{!!stop.visited ? 'Desmarcar visitado' : 'Marcar visitado'}</MACTTextBold>
+            <MACTTextBold style={[styles.markVisitedButtonLabel, { fontSize: accessibilitySettings.fontAmplifier +  20 , }]} >{!!stop.visited ? 'Desmarcar visitado' : 'Marcar visitado'}</MACTTextBold>
         </Pressable>
       </View>
     )

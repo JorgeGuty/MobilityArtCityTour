@@ -22,10 +22,13 @@ const Home = ({ navigation, route }) => {
   let referencePointsCoord
 
   let selectedRouteIndex = route.params.selectedRouteIndex ? route.params.selectedRouteIndex : 0
-  let paramsFontAmplifier = route.params.fontAmplifier ? route.params.fontAmplifier : 0
+  let paramsAccessibilitySettings = route.params.accessibilitySettings ? route.params.accessibilitySettings : null
 
   const [serverRoutes, setServerRoutes] = useState([])
-  const [fontAmplifier, setFontAmplifier] = useState(0)
+  
+  const [accessibilitySettings, setAccessibilitySettings] = useState({
+    fontAmplifier: 0
+  })
 
   const [selectedRoute, setSelectedRoute] = useState({})
   const [showStops, setShowStops] = useState(true)
@@ -33,6 +36,7 @@ const Home = ({ navigation, route }) => {
   const [showStopInfoModal, setShowStopInfoModal] = useState(false)
   const [showFiltersModal, setShowFiltersModal] = useState(false)
   const [showSearchHeader, setShowSearchHeader] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   const [clickedStop, setClickedStop] = useState({})
   const [modeToggler, setModeToggler] = useState(true)
 
@@ -106,8 +110,14 @@ const Home = ({ navigation, route }) => {
   },[selectedRouteIndex])
 
   useEffect(()=> {
-    setFontAmplifier(paramsFontAmplifier)
-  },[paramsFontAmplifier])
+    if (paramsAccessibilitySettings !== null) {
+      let modifiedAccessibility = {
+        ...paramsAccessibilitySettings
+      };    
+      setAccessibilitySettings(modifiedAccessibility)
+    }
+
+  },[paramsAccessibilitySettings])
 
   useEffect(()=>{
     getPointsFromServer(selectedCategory)
@@ -151,7 +161,8 @@ const Home = ({ navigation, route }) => {
   }
 
   const navigateToMenu = () => {
-    navigation.navigate('Menu', {routes: serverRoutes})
+    // console.log('Accessibility sent from home: ', accessibilitySettings)
+    navigation.navigate('Menu', {routes: serverRoutes, accessibilitySettings: accessibilitySettings})
   }
 
   return (
@@ -167,6 +178,7 @@ const Home = ({ navigation, route }) => {
               showStops={modeToggler}
               onPressStop={onPressStopInfo}
               onPressPoint={onPressPoint}
+              accessibilitySettings={accessibilitySettings}
             />
 
             <InterestPointsHeader
@@ -175,6 +187,7 @@ const Home = ({ navigation, route }) => {
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
               setShowFiltersModal={setShowFiltersModal}
+              accessibilitySettings={accessibilitySettings}
             />
 
             <HomeHeader
@@ -183,6 +196,7 @@ const Home = ({ navigation, route }) => {
               filterPoints={filterPoints}
               setShowSearchHeader={setShowSearchHeader}
               goToMenu={navigateToMenu}
+              accessibilitySettings={accessibilitySettings}
             ></HomeHeader>
 
             <SearchPointsHeader
@@ -190,11 +204,13 @@ const Home = ({ navigation, route }) => {
               searchPoints={searchPoints}
               setShow={setShowSearchHeader}
               resetPoints={resetPoints}
+              accessibilitySettings={accessibilitySettings}
             ></SearchPointsHeader>
 
             <InterestPointsModal
               show={!modeToggler}
               points={filteredPoints}
+              accessibilitySettings={accessibilitySettings}
             ></InterestPointsModal>
 
             <SelectedRouteModal
@@ -203,6 +219,7 @@ const Home = ({ navigation, route }) => {
               onPressBusInfo={onPressBusInfo}
               onPressStopInfo={onPressStopInfo}
               show={modeToggler}
+              accessibilitySettings={accessibilitySettings}
             />
 
             <BusInfoModal
@@ -211,6 +228,7 @@ const Home = ({ navigation, route }) => {
                 showModal={showBusInfoModal}
                 setShowModal={setShowBusInfoModal}
                 startYTranslation={Dimensions.get('window').height}
+                accessibilitySettings={accessibilitySettings}
             />
 
             <StopInfoModal
@@ -219,6 +237,7 @@ const Home = ({ navigation, route }) => {
                 setShowModal={setShowStopInfoModal}
                 startYTranslation={Dimensions.get('window').height}
                 toggleStopVisited={toggleStopVisited}
+                accessibilitySettings={accessibilitySettings}
             />
 
             <FilterPointsModal
@@ -226,6 +245,7 @@ const Home = ({ navigation, route }) => {
               showModal={showFiltersModal}
               startYTranslation={Dimensions.get('window').height}
               filterItems={filterPoints}
+              accessibilitySettings={accessibilitySettings}
             />
 
           </>

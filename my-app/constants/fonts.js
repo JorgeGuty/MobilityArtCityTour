@@ -1,10 +1,10 @@
-import { Text } from 'react-native'
+import { Text, Animated } from 'react-native'
 import { Colors } from './colors'
 
 export const H1 = (props) => {
   return (
     <Text
-      allowFontScaling={false}
+      allowFontScaling={true}
       {...props}
       style={[
         {
@@ -332,8 +332,8 @@ export const MACTText = (props) => {
   }
 
   return (
-    <Text
-      allowFontScaling={false}
+    <Animated.Text
+      allowFontScaling
       {...props}
       style={[
         {
@@ -345,7 +345,7 @@ export const MACTText = (props) => {
       ]}
     >
       {props.children}
-    </Text>
+    </Animated.Text>
   )
 }
 
